@@ -28,9 +28,9 @@ public final class DevClientSmokeTest {
 		if (mc.screen instanceof net.minecraft.client.gui.screens.PauseScreen) mc.setScreen(null);
 		ticksInForest++;
 		// last shot from the front (switched a few seconds early so it has rendered), so worn trinkets are visible
-		if (shots == 2 && ticksInForest % 200 == 100) mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT);
+		if (shots == 2 && ticksInForest % 200 == 100 && System.getProperty("twilightforest.smoketest.focus") == null) mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT);
 		if (ticksInForest % 200 == 0) {
-			if (shots < 2) mc.player.setYRot(mc.player.getYRot() + 120.0F);
+			if (shots < 2 && System.getProperty("twilightforest.smoketest.focus") == null) mc.player.setYRot(mc.player.getYRot() + 120.0F);
 			Screenshot.grab(mc.gameDirectory, "tf_smoketest_" + shots + ".png", mc.getMainRenderTarget(), 1,
 				msg -> TwilightForestMod.LOGGER.info("[smoketest] {}", msg.getString()));
 			shots++;

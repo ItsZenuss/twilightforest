@@ -53,9 +53,17 @@ public final class DevSmokeTest {
 				ServerLevel level = server.getLevel(TFDimension.DIMENSION_KEY);
 				if (level == null) return;
 				int y = level.getChunk(0, 0).getHeight(Heightmap.Types.MOTION_BLOCKING, 8, 8) + 2;
-				handler.getPlayer().teleportTo(level, 8.5, y, 8.5, java.util.Set.of(), 135.0F, 20.0F, true);
+				String focus = System.getProperty("twilightforest.smoketest.focus");
+				handler.getPlayer().teleportTo(level, 8.5, y, 8.5, java.util.Set.of(), focus != null ? 0.0F : 135.0F, focus != null ? -15.0F : 20.0F, true);
 				TwilightForestMod.LOGGER.info("[smoketest] Teleported {} into the Twilight Forest at y={}", handler.getPlayer().getName().getString(), y);
-				if (Boolean.getBoolean("twilightforest.smoketest.showcase")) showcase(level, new BlockPos(8, y, 8));
+				if (focus != null) {
+					// one entity in front of the player (who faces +Z), twilightforest.smoketest.focus.distance blocks away
+					net.minecraft.world.entity.EntityType<?> type = net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getValue(net.minecraft.resources.Identifier.parse(focus));
+					net.minecraft.world.entity.Entity entity = type.spawn(level, new BlockPos(8, y, 8 + Integer.getInteger("twilightforest.smoketest.focus.distance", 12)), net.minecraft.world.entity.EntitySpawnReason.COMMAND);
+					if (entity instanceof net.minecraft.world.entity.Mob mob) mob.setNoAi(!Boolean.getBoolean("twilightforest.smoketest.focus.ai"));
+					TwilightForestMod.LOGGER.info("[smoketest] Focus: spawned {} (multipart={}, parts={})", focus, entity != null && entity.isMultipartEntity(),
+						entity != null && entity.getParts() != null ? entity.getParts().length : 0);
+				} else if (Boolean.getBoolean("twilightforest.smoketest.showcase")) showcase(level, new BlockPos(8, y, 8));
 				if (net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("trinkets")) {
 					// trinket slots are set up after login, so equip a couple of seconds later
 					net.minecraft.server.level.ServerPlayer player = handler.getPlayer();

@@ -134,6 +134,10 @@ loom {
 			vmArg "-Dtwilightforest.smoketest.teleport=true"
 			vmArg "-Dtwilightforest.smoketest.screenshots=true"
 			vmArg "-Dtwilightforest.smoketest.showcase=true"
+			// ./gradlew runClientTest -PtfFocus=twilightforest:hydra spawns just that entity in front of the player instead
+			if (project.hasProperty('tfFocus')) vmArg "-Dtwilightforest.smoketest.focus=${project.property('tfFocus')}"
+			if (project.hasProperty('tfFocusAi')) vmArg "-Dtwilightforest.smoketest.focus.ai=true"
+			if (project.hasProperty('tfFocusDistance')) vmArg "-Dtwilightforest.smoketest.focus.distance=${project.property('tfFocusDistance')}"
 			programArgs "--quickPlaySingleplayer", "tftest"
 		}
 		gametest {

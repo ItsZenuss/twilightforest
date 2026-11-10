@@ -254,12 +254,18 @@ public final class BeanContext {
 				if (!method.isAnnotationPresent(PostConstruct.class)) continue;
 				try {
 					method.setAccessible(true);
-					if (method.getParameterCount() == 1 && method.getParameterTypes()[0].isAssignableFrom(IEventBus.class)) {
+					Class<?>[] params = method.getParameterTypes();
+					if (params.length == 0) {
+						method.invoke(instance);
+					} else if (params.length == 1 && params[0].isAssignableFrom(IEventBus.class)) {
 						PostConstruct pc = method.getAnnotation(PostConstruct.class);
 						IEventBus targetBus = (pc.value() == PostConstruct.Bus.GAME) ? NeoForge.EVENT_BUS : modBus;
 						method.invoke(instance, targetBus);
-					} else if (method.getParameterCount() == 0) {
-						method.invoke(instance);
+					} else if (params.length == 2 && params[0].isAssignableFrom(IEventBus.class) && params[1].isAssignableFrom(IEventBus.class)) {
+						// (modBus, gameBus)
+						method.invoke(instance, modBus, NeoForge.EVENT_BUS);
+					} else {
+						LOGGER.error("Unsupported @PostConstruct signature on {}.{}; it was not called", clazz.getName(), method.getName());
 					}
 				} catch (ReflectiveOperationException e) {
 					LOGGER.error("PostConstruct failed for {}.{}", clazz.getName(), method.getName(), e);
