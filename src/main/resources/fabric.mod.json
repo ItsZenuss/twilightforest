@@ -104,7 +104,7 @@
     "fabricloader": ">=0.18.4",
     "minecraft": "~26.1",
     "java": ">=25",
-    "fabric-api": ">=0.145.4"
+    "fabric-api": ">=0.155.3"
   },
   "suggests": {
     "trinkets": "*",
