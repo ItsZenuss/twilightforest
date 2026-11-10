@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.EventHooks;
+import twilightforest.port.neoforged.neoforge.event.EventHooks;
 import twilightforest.entity.monster.Redcap;
 
 import java.util.EnumSet;

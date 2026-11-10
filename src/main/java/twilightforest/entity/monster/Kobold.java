@@ -29,7 +29,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
 import twilightforest.entity.ai.goal.FlockToSameKindGoal;
 import twilightforest.entity.ai.goal.PanicOnFlockDeathGoal;
 import twilightforest.init.TFSounds;

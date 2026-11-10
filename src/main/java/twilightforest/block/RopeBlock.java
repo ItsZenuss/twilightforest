@@ -88,7 +88,6 @@ public class RopeBlock extends Block implements SimpleWaterloggedBlock {
 		return shape;
 	}
 
-	@Override
 	public boolean isScaffolding(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
 		return true;
 	}

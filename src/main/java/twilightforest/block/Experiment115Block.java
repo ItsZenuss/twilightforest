@@ -70,14 +70,14 @@ public class Experiment115Block extends Block {
 			if (stack.is(TFItems.EXPERIMENT_115.get())) {
 				if (bitesTaken == 0) return InteractionResult.FAIL;
 				level.setBlockAndUpdate(pos, state.setValue(BITES_TAKEN, bitesTaken - 1));
-				level.playSound(null, pos, state.getSoundType(level, pos, player).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+				level.playSound(null, pos, state.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 				stack.consume(1, player);
 				if (player instanceof ServerPlayer)
 					CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, pos, stack);
 				return InteractionResult.SUCCESS;
 			} else if (!state.getValue(REGENERATE) && bitesTaken == 0 && stack.is(Items.REDSTONE)) {
 				level.setBlockAndUpdate(pos, state.setValue(REGENERATE, true));
-				level.playSound(null, pos, state.getSoundType(level, pos, player).getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+				level.playSound(null, pos, state.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 				stack.consume(1, player);
 				if (player instanceof ServerPlayer) {
 					player.awardStat(Stats.ITEM_USED.get(Items.REDSTONE));

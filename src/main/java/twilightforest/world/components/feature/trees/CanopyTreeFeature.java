@@ -98,7 +98,7 @@ public class CanopyTreeFeature extends TFTreeFeature<TFTreeFeatureConfig> {
 		BlockPos dest = FeatureLogic.translate(src, length, angle, tilt);
 
 		// only actually draw the branch if it's not going to load new chunks
-		if (world.isAreaLoaded(dest, 5)) {
+		if (world.hasChunksAt(dest.offset(-5, -5, -5), dest.offset(5, 5, 5))) {
 
 			if (trunk) {
 				FeaturePlacers.drawBresenhamTree(world, trunkPlacer, FeaturePlacers.VALID_TREE_POS, src, dest, config.trunkProvider, treeRNG);

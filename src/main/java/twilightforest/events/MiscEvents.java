@@ -19,13 +19,13 @@ import net.minecraft.world.level.block.LecternBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.fml.ModList;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.player.PlayerEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
 import tamaized.beanification.Autowired;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
@@ -49,11 +49,11 @@ public class MiscEvents {
 
 	@PostConstruct
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(this::addPrey);
-		NeoForge.EVENT_BUS.addListener(this::updateCicadaSoundsOnHead);
-		NeoForge.EVENT_BUS.addListener(this::addTomesToLecterns);
-		NeoForge.EVENT_BUS.addListener(this::washOffCloth);
-		NeoForge.EVENT_BUS.addListener(this::playQueenRefillSound);
+		NeoForge.EVENT_BUS.addListener(EntityJoinLevelEvent.class, this::addPrey);
+		NeoForge.EVENT_BUS.addListener(LivingEquipmentChangeEvent.class, this::updateCicadaSoundsOnHead);
+		NeoForge.EVENT_BUS.addListener(PlayerInteractEvent.RightClickBlock.class, this::addTomesToLecterns);
+		NeoForge.EVENT_BUS.addListener(PlayerInteractEvent.RightClickBlock.class, this::washOffCloth);
+		NeoForge.EVENT_BUS.addListener(PlayerEvent.ItemCraftedEvent.class, this::playQueenRefillSound);
 	}
 
 	private void addPrey(EntityJoinLevelEvent event) {
@@ -84,10 +84,10 @@ public class MiscEvents {
 		// from what I can see, vanilla doesn't have a hook for this in the item class. So this will have to do.
 		// we only have to check equipping, when its unequipped the sound instance handles the rest
 
-		//if we have a cicada in our curios slot, don't try to run this
-		 if (ModList.get().isLoaded("curios")) {
-//		 	if (CuriosCompat.isCurioEquipped(living, stack -> stack.is(TFBlocks.CICADA.asItem()))) return;
-		 }
+		//if we have a cicada in a trinket slot, don't try to run this (the trinket already started the sound)
+		if (ModList.get().isLoaded("trinkets")) {
+			if (twilightforest.compat.trinkets.TrinketsCompat.isTrinketEquipped(living, stack -> stack.is(TFBlocks.CICADA.asItem()))) return;
+		}
 
 		if (!living.level().isClientSide() && event.getSlot() == EquipmentSlot.HEAD && event.getTo().is(TFBlocks.CICADA.asItem())) {
 			PacketDistributor.sendToPlayersTrackingEntityAndSelf(living, new CreateMovingCicadaSoundPacket(living.getId()));

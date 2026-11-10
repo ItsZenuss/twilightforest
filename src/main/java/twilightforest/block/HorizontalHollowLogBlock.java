@@ -34,7 +34,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.ItemAbilities;
+import net.minecraft.tags.ItemTags;
 import twilightforest.enums.HollowLogVariants;
 import twilightforest.init.TFBlocks;
 import twilightforest.util.AxisUtil;
@@ -165,7 +165,7 @@ public class HorizontalHollowLogBlock extends Block implements WaterloggedBlock 
 
 				return InteractionResult.SUCCESS;
 			}
-		} else if (stack.canPerformAction(ItemAbilities.SHOVEL_FLATTEN)) {
+		} else if (stack.is(ItemTags.SHOVELS)) {
 			if (variant == HollowLogVariants.Horizontal.SNOW) {
 				level.setBlock(pos, state.setValue(VARIANT, HollowLogVariants.Horizontal.EMPTY), Block.UPDATE_ALL);
 				playBreakSound(Blocks.SNOW.defaultBlockState(), level, pos, player);
@@ -176,7 +176,7 @@ public class HorizontalHollowLogBlock extends Block implements WaterloggedBlock 
 
 				return InteractionResult.SUCCESS;
 			}
-		} else if (stack.canPerformAction(ItemAbilities.SHEARS_HARVEST)) {
+		} else if (stack.is(Items.SHEARS)) {
 			if (variant == HollowLogVariants.Horizontal.MOSS || variant == HollowLogVariants.Horizontal.MOSS_AND_GRASS) {
 				level.setBlock(pos, state.setValue(VARIANT, HollowLogVariants.Horizontal.EMPTY), Block.UPDATE_ALL);
 				level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -196,12 +196,12 @@ public class HorizontalHollowLogBlock extends Block implements WaterloggedBlock 
 	}
 
 	public static void playPlaceSound(BlockState state, Level level, BlockPos pos, Player player) {
-		SoundType soundtype = state.getSoundType(level, pos, player);
+		SoundType soundtype = state.getSoundType();
 		level.playSound(null, pos, soundtype.getPlaceSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 	}
 
 	public static void playBreakSound(BlockState state, Level level, BlockPos pos, Player player) {
-		SoundType soundtype = state.getSoundType(level, pos, player);
+		SoundType soundtype = state.getSoundType();
 		level.playSound(null, pos, soundtype.getBreakSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 	}
 

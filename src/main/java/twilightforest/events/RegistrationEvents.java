@@ -20,23 +20,23 @@ import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
-import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.neoforged.neoforge.registries.DataPackRegistryEvent;
-import net.neoforged.neoforge.registries.NewRegistryEvent;
-import net.neoforged.neoforge.registries.RegisterEvent;
-import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
+import twilightforest.port.neoforged.bus.api.IEventBus;
+import twilightforest.port.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import twilightforest.port.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
+import twilightforest.port.neoforged.neoforge.capabilities.Capabilities;
+import twilightforest.port.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.event.AddServerReloadListenersEvent;
+import twilightforest.port.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
+import twilightforest.port.neoforged.neoforge.event.RegisterCommandsEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import twilightforest.port.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import twilightforest.port.neoforged.neoforge.network.registration.PayloadRegistrar;
+import twilightforest.port.neoforged.neoforge.registries.DataPackRegistryEvent;
+import twilightforest.port.neoforged.neoforge.registries.NewRegistryEvent;
+import twilightforest.port.neoforged.neoforge.registries.RegisterEvent;
+import twilightforest.port.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import tamaized.beanification.Autowired;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
@@ -85,27 +85,27 @@ public class RegistrationEvents {
 
 	@PostConstruct
 	private void setup(IEventBus bus) {
-		bus.addListener(this::init);
-		bus.addListener(this::sendIMCs);
-		bus.addListener(this::setupPackets);
-		bus.addListener(this::createDataMaps);
-		bus.addListener(this::registerExtraStuff);
-		bus.addListener(this::createNewRegistries);
-		bus.addListener(this::addBlockEntityTypes);
-		bus.addListener(this::setRegistriesForDatapack);
-		bus.addListener(this::registerGenericItemHandlers);
-		bus.addListener(this::addEntityAttributes);
-		bus.addListener(this::registerSpawnPlacements);
-		bus.addListener(TFCreativeTabs::addToTabs);
+		bus.addListener(FMLCommonSetupEvent.class, this::init);
+		bus.addListener(InterModEnqueueEvent.class, this::sendIMCs);
+		bus.addListener(RegisterPayloadHandlersEvent.class, this::setupPackets);
+		bus.addListener(RegisterDataMapTypesEvent.class, this::createDataMaps);
+		bus.addListener(RegisterEvent.class, this::registerExtraStuff);
+		bus.addListener(NewRegistryEvent.class, this::createNewRegistries);
+		bus.addListener(BlockEntityTypeAddBlocksEvent.class, this::addBlockEntityTypes);
+		bus.addListener(DataPackRegistryEvent.NewRegistry.class, this::setRegistriesForDatapack);
+		bus.addListener(RegisterCapabilitiesEvent.class, this::registerGenericItemHandlers);
+		bus.addListener(EntityAttributeCreationEvent.class, this::addEntityAttributes);
+		bus.addListener(RegisterSpawnPlacementsEvent.class, this::registerSpawnPlacements);
+		bus.addListener(twilightforest.port.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent.class, TFCreativeTabs::addToTabs);
 
-		bus.addListener(ConfigSetup::loadConfigs);
-		bus.addListener(ConfigSetup::reloadConfigs);
+		bus.addListener(twilightforest.port.neoforged.fml.event.config.ModConfigEvent.Loading.class, ConfigSetup::loadConfigs);
+		bus.addListener(twilightforest.port.neoforged.fml.event.config.ModConfigEvent.Reloading.class, ConfigSetup::reloadConfigs);
 
-		NeoForge.EVENT_BUS.addListener(this::registerCommands);
+		NeoForge.EVENT_BUS.addListener(RegisterCommandsEvent.class, this::registerCommands);
 		NeoForge.EVENT_BUS.addListener(AddServerReloadListenersEvent.class, event -> event.addListener(TwilightForestMod.prefix("quest"), new QuestReloadListener()));
 //		NeoForge.EVENT_BUS.addListener(AddServerReloadListenersEvent.class, event -> event.addListener(TwilightForestMod.prefix("travellers_cache"), TravellersModifiersManager.CacheInvalidationReloadListener.INSTANCE));
-		NeoForge.EVENT_BUS.addListener(StalactiteReloadListener.INSTANCE::registerListener);
-		NeoForge.EVENT_BUS.addListener(this.structureTemplateDefinitions::registerListener);
+		NeoForge.EVENT_BUS.addListener(twilightforest.port.neoforged.neoforge.event.AddServerReloadListenersEvent.class, StalactiteReloadListener.INSTANCE::registerListener);
+		NeoForge.EVENT_BUS.addListener(twilightforest.port.neoforged.neoforge.event.AddServerReloadListenersEvent.class, this.structureTemplateDefinitions::registerListener);
 	}
 
 	private void registerGenericItemHandlers(RegisterCapabilitiesEvent event) {
@@ -265,22 +265,22 @@ public class RegistrationEvents {
 
 			FlowerPotBlock pot = (FlowerPotBlock) Blocks.FLOWER_POT;
 
-			pot.addPlant(TFBlocks.TWILIGHT_OAK_SAPLING.getId(), TFBlocks.POTTED_TWILIGHT_OAK_SAPLING);
-			pot.addPlant(TFBlocks.CANOPY_SAPLING.getId(), TFBlocks.POTTED_CANOPY_SAPLING);
-			pot.addPlant(TFBlocks.MANGROVE_SAPLING.getId(), TFBlocks.POTTED_MANGROVE_SAPLING);
-			pot.addPlant(TFBlocks.DARKWOOD_SAPLING.getId(), TFBlocks.POTTED_DARKWOOD_SAPLING);
-			pot.addPlant(TFBlocks.HOLLOW_OAK_SAPLING.getId(), TFBlocks.POTTED_HOLLOW_OAK_SAPLING);
-			pot.addPlant(TFBlocks.RAINBOW_OAK_SAPLING.getId(), TFBlocks.POTTED_RAINBOW_OAK_SAPLING);
-			pot.addPlant(TFBlocks.TIME_SAPLING.getId(), TFBlocks.POTTED_TIME_SAPLING);
-			pot.addPlant(TFBlocks.TRANSFORMATION_SAPLING.getId(), TFBlocks.POTTED_TRANSFORMATION_SAPLING);
-			pot.addPlant(TFBlocks.MINING_SAPLING.getId(), TFBlocks.POTTED_MINING_SAPLING);
-			pot.addPlant(TFBlocks.SORTING_SAPLING.getId(), TFBlocks.POTTED_SORTING_SAPLING);
-			pot.addPlant(TFBlocks.MAYAPPLE.getId(), TFBlocks.POTTED_MAYAPPLE);
-			pot.addPlant(TFBlocks.FIDDLEHEAD.getId(), TFBlocks.POTTED_FIDDLEHEAD);
-			pot.addPlant(TFBlocks.MUSHGLOOM.getId(), TFBlocks.POTTED_MUSHGLOOM);
-			pot.addPlant(TFBlocks.BROWN_THORNS.getId(), TFBlocks.POTTED_THORN);
-			pot.addPlant(TFBlocks.GREEN_THORNS.getId(), TFBlocks.POTTED_GREEN_THORN);
-			pot.addPlant(TFBlocks.BURNT_THORNS.getId(), TFBlocks.POTTED_DEAD_THORN);
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.TWILIGHT_OAK_SAPLING.get(), TFBlocks.POTTED_TWILIGHT_OAK_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.CANOPY_SAPLING.get(), TFBlocks.POTTED_CANOPY_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.MANGROVE_SAPLING.get(), TFBlocks.POTTED_MANGROVE_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.DARKWOOD_SAPLING.get(), TFBlocks.POTTED_DARKWOOD_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.HOLLOW_OAK_SAPLING.get(), TFBlocks.POTTED_HOLLOW_OAK_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.RAINBOW_OAK_SAPLING.get(), TFBlocks.POTTED_RAINBOW_OAK_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.TIME_SAPLING.get(), TFBlocks.POTTED_TIME_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.TRANSFORMATION_SAPLING.get(), TFBlocks.POTTED_TRANSFORMATION_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.MINING_SAPLING.get(), TFBlocks.POTTED_MINING_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.SORTING_SAPLING.get(), TFBlocks.POTTED_SORTING_SAPLING.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.MAYAPPLE.get(), TFBlocks.POTTED_MAYAPPLE.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.FIDDLEHEAD.get(), TFBlocks.POTTED_FIDDLEHEAD.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.MUSHGLOOM.get(), TFBlocks.POTTED_MUSHGLOOM.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.BROWN_THORNS.get(), TFBlocks.POTTED_THORN.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.GREEN_THORNS.get(), TFBlocks.POTTED_GREEN_THORN.get());
+			FlowerPotBlock.POTTED_BY_CONTENT.put(TFBlocks.BURNT_THORNS.get(), TFBlocks.POTTED_DEAD_THORN.get());
 
 			FireBlock fireblock = (FireBlock) Blocks.FIRE;
 			fireblock.setFlammable(TFBlocks.TWILIGHT_OAK_LOG.get(), 5, 5);

@@ -40,7 +40,7 @@ public class MinoshroomRenderer extends HumanoidMobRenderer<Minoshroom, Minoshro
 	@Override
 	public void extractRenderState(Minoshroom entity, MinoshroomRenderState state, float partialTick) {
 		super.extractRenderState(entity, state, partialTick);
-		state.chargeAnim = Mth.lerp(state.partialTick, entity.prevClientSideChargeAnimation, entity.clientSideChargeAnimation) / 6.0F;
+		state.chargeAnim = Mth.lerp(partialTick, entity.prevClientSideChargeAnimation, entity.clientSideChargeAnimation) / 6.0F;
 		this.blockModelResolver.update(state.mushroomModel, Blocks.BROWN_MUSHROOM.defaultBlockState(), BLOCK_DISPLAY_CONTEXT);
 
 	}

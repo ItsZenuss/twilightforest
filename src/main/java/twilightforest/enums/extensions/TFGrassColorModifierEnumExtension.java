@@ -1,35 +1,19 @@
 package twilightforest.enums.extensions;
 
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
-import twilightforest.TFEnumExtensions;
 import tamaized.beanification.Component;
 
+/**
+ * Fabric port: NeoForge enum extensions are unavailable. Twilight biomes use {@code NONE} in data and
+ * their custom grass colours are applied client-side by {@link twilightforest.client.GrassColorHandler}.
+ */
 @Component
 public class TFGrassColorModifierEnumExtension {
 
-	/**
-	 * {@link TFEnumExtensions#GrassColorModifier_ENCHANTED_FOREST(int, Class)}
-	 */
-	public final BiomeSpecialEffects.GrassColorModifier ENCHANTED_FOREST = BiomeSpecialEffects.GrassColorModifier.valueOf("TWILIGHTFOREST_ENCHANTED_FOREST");
-
-	/**
-	 * {@link TFEnumExtensions#GrassColorModifier_SWAMP(int, Class)}
-	 */
-	public final BiomeSpecialEffects.GrassColorModifier SWAMP = BiomeSpecialEffects.GrassColorModifier.valueOf("TWILIGHTFOREST_SWAMP");
-
-	/**
-	 * {@link TFEnumExtensions#GrassColorModifier_DARK_FOREST(int, Class)}
-	 */
-	public final BiomeSpecialEffects.GrassColorModifier DARK_FOREST = BiomeSpecialEffects.GrassColorModifier.valueOf("TWILIGHTFOREST_DARK_FOREST");
-
-	/**
-	 * {@link TFEnumExtensions#GrassColorModifier_DARK_FOREST_CENTER(int, Class)}
-	 */
-	public final BiomeSpecialEffects.GrassColorModifier DARK_FOREST_CENTER = BiomeSpecialEffects.GrassColorModifier.valueOf("TWILIGHTFOREST_DARK_FOREST_CENTER");
-
-	/**
-	 * {@link TFEnumExtensions#GrassColorModifier_SPOOKY_FOREST(int, Class)}
-	 */
-	public final BiomeSpecialEffects.GrassColorModifier SPOOKY_FOREST = BiomeSpecialEffects.GrassColorModifier.valueOf("TWILIGHTFOREST_SPOOKY_FOREST");
+	public final BiomeSpecialEffects.GrassColorModifier ENCHANTED_FOREST = BiomeSpecialEffects.GrassColorModifier.NONE;
+	public final BiomeSpecialEffects.GrassColorModifier SWAMP = BiomeSpecialEffects.GrassColorModifier.NONE;
+	public final BiomeSpecialEffects.GrassColorModifier DARK_FOREST = BiomeSpecialEffects.GrassColorModifier.NONE;
+	public final BiomeSpecialEffects.GrassColorModifier DARK_FOREST_CENTER = BiomeSpecialEffects.GrassColorModifier.NONE;
+	public final BiomeSpecialEffects.GrassColorModifier SPOOKY_FOREST = BiomeSpecialEffects.GrassColorModifier.NONE;
 
 }

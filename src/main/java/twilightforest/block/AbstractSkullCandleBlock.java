@@ -29,8 +29,8 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.ItemAbility;
+import twilightforest.port.neoforged.neoforge.common.ItemAbilities;
+import twilightforest.port.neoforged.neoforge.common.ItemAbility;
 import org.jspecify.annotations.Nullable;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.entity.SkullCandleBlockEntity;
@@ -57,7 +57,6 @@ public abstract class AbstractSkullCandleBlock extends BaseEntityBlock implement
 		return this.type;
 	}
 
-	@Override
 	public int getLightEmission(BlockState state, BlockGetter getter, BlockPos pos) {
 		return switch (state.getValue(LIGHTING)) {
 			case NORMAL -> 3 * state.getValue(CANDLES);
@@ -67,14 +66,13 @@ public abstract class AbstractSkullCandleBlock extends BaseEntityBlock implement
 		};
 	}
 
-	@Override
 	public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
 		if (ItemAbilities.FIRESTARTER_LIGHT == itemAbility) {
 			if (this.canBeLit(state)) {
 				return state.setValue(LIGHTING, Lighting.NORMAL);
 			}
 		}
-		return super.getToolModifiedState(state, context, itemAbility, simulate);
+		return null;
 	}
 
 	@Override

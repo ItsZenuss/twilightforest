@@ -12,7 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import org.jspecify.annotations.Nullable;
 import twilightforest.block.ForceFieldBlock;
 import twilightforest.client.model.block.forcefield.ForceFieldElement.Condition;

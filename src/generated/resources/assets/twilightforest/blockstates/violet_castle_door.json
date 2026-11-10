@@ -1,7 +1,7 @@
 {
   "variants": {
     "vanish=false": {
-      "type": "twilightforest:connected_texture_block",
+      "fabric:type": "twilightforest:connected_texture_block",
       "connectable_blocks": [
         "twilightforest:blue_castle_door",
         "twilightforest:pink_castle_door",
@@ -19,7 +19,7 @@
       }
     },
     "vanish=true": {
-      "type": "twilightforest:connected_texture_block",
+      "fabric:type": "twilightforest:connected_texture_block",
       "connectable_blocks": [
         "twilightforest:blue_castle_door",
         "twilightforest:pink_castle_door",

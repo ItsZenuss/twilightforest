@@ -21,12 +21,12 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.world.AuxiliaryLightManager;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
-import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
-import net.neoforged.neoforge.transfer.transaction.TransactionContext;
+import twilightforest.port.neoforged.neoforge.common.world.AuxiliaryLightManager;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.server.ServerLifecycleHooks;
+import twilightforest.port.neoforged.neoforge.transfer.item.ItemResource;
+import twilightforest.port.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import twilightforest.port.neoforged.neoforge.transfer.transaction.TransactionContext;
 import twilightforest.init.TFBlockEntities;
 import twilightforest.network.SetMasonJarItemPacket;
 
@@ -120,10 +120,6 @@ public class MasonJarBlockEntity extends JarBlockEntity {
 		super.setChanged();
 		if (this.level != null) {
 			BlockPos pos = this.getBlockPos();
-			AuxiliaryLightManager lightManager = this.level.getAuxLightManager(pos);
-			if (lightManager != null) {
-				lightManager.setLightAt(pos, this.item.getItem().getItem() instanceof BlockItem blockItem ? blockItem.getBlock().defaultBlockState().getLightEmission() : 0);
-			}
 			this.level.getLightEngine().checkBlock(pos);
 		}
 		if (this.level instanceof ServerLevel serverLevel) {
@@ -164,7 +160,7 @@ public class MasonJarBlockEntity extends JarBlockEntity {
 
 		@Override
 		public boolean isValid(int index, ItemResource resource) {
-			return resource.toStack().canFitInsideContainerItems();
+			return resource.toStack().getItem().canFitInsideContainerItems();
 		}
 
 		@Override

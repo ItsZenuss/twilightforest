@@ -33,14 +33,13 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.fluids.FluidType;
-import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.access.ItemAccess;
-import net.neoforged.neoforge.transfer.fluid.FluidResource;
-import net.neoforged.neoforge.transfer.fluid.FluidUtil;
-import net.neoforged.neoforge.transfer.transaction.Transaction;
+import twilightforest.port.neoforged.neoforge.capabilities.Capabilities;
+import twilightforest.port.neoforged.neoforge.fluids.FluidType;
+import twilightforest.port.neoforged.neoforge.transfer.ResourceHandler;
+import twilightforest.port.neoforged.neoforge.transfer.access.ItemAccess;
+import twilightforest.port.neoforged.neoforge.transfer.fluid.FluidResource;
+import twilightforest.port.neoforged.neoforge.transfer.fluid.FluidUtil;
+import twilightforest.port.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
 import twilightforest.block.entity.BrazierBlockEntity;
 import twilightforest.enums.BrazierLight;
@@ -105,7 +104,7 @@ public class BrazierBlock extends BaseEntityBlock {
 
 	@Override
 	public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-		if (!level.isClientSide() && (player.isCreative() || !player.hasCorrectToolForDrops(state, level, pos))) {
+		if (!level.isClientSide() && (player.isCreative() || !player.hasCorrectToolForDrops(state))) {
 			DoubleBlockHalf half = state.getValue(HALF);
 			if (half == DoubleBlockHalf.UPPER) {
 				BlockPos below = pos.below();
@@ -148,7 +147,7 @@ public class BrazierBlock extends BaseEntityBlock {
 	@Override
 	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if (state.is(this) && state.getValue(HALF) == DoubleBlockHalf.UPPER) {
-			if (state.getValue(LIGHT) != BrazierLight.FULL && stack.canPerformAction(ItemAbilities.FIRESTARTER_LIGHT)) {
+			if (state.getValue(LIGHT) != BrazierLight.FULL && (stack.is(Items.FLINT_AND_STEEL) || stack.is(Items.FIRE_CHARGE))) {
 				level.setBlock(pos, state.cycle(LIGHT), 11);
 				level.getBlockState(pos.below()).cycle(LIGHT);
 				if (stack.is(Items.FLINT_AND_STEEL)) {

@@ -54,7 +54,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.block.LightableBlock;
 import twilightforest.block.OminousCandleBlock;

@@ -3,7 +3,7 @@ package twilightforest.client.event;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
-import net.neoforged.neoforge.client.event.ViewportEvent;
+import twilightforest.port.neoforged.neoforge.client.event.ViewportEvent;
 import twilightforest.init.TFBiomes;
 import twilightforest.init.TFDimension;
 

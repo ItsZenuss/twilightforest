@@ -8,25 +8,25 @@
       "g": "twilightforest:travellers_goggles",
       "s": "#c:slime_balls",
       "w": {
-        "neoforge:ingredient_type": "neoforge:compound",
-        "children": [
+        "fabric:type": "fabric:any",
+        "ingredients": [
           {
-            "neoforge:ingredient_type": "neoforge:components",
+            "fabric:type": "fabric:components",
+            "base": "minecraft:potion",
             "components": {
               "minecraft:potion_contents": {
                 "potion": "minecraft:water_breathing"
               }
-            },
-            "items": "minecraft:potion"
+            }
           },
           {
-            "neoforge:ingredient_type": "neoforge:components",
+            "fabric:type": "fabric:components",
+            "base": "minecraft:potion",
             "components": {
               "minecraft:potion_contents": {
                 "potion": "minecraft:long_water_breathing"
               }
-            },
-            "items": "minecraft:potion"
+            }
           }
         ]
       }

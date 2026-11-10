@@ -21,8 +21,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gamerules.GameRules;
-import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.common.Tags;
+import twilightforest.port.neoforged.fml.loading.FMLEnvironment;
+import twilightforest.port.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.TwilightForestMod;
@@ -250,7 +250,7 @@ public class UncraftingMenu extends AbstractCraftingMenu {
 					});
 				}
 				//remove any incompatible enchants
-				enchants.removeIf(holder -> !result.supportsEnchantment(holder));
+				enchants.removeIf(holder -> !holder.value().isSupportedItem(result));
 
 				//remove enchantments and replace with filtered list
 				result.remove(DataComponents.ENCHANTMENTS);
@@ -628,7 +628,7 @@ public class UncraftingMenu extends AbstractCraftingMenu {
 				continue;
 			}
 
-			ItemStack[] matchingStacks = ingredients.get(index).getValues().stream().filter(s -> !s.is(TFItemTags.BANNED_UNCRAFTING_INGREDIENTS)).map(p -> new ItemStack(p.value())).toArray(ItemStack[]::new);
+			ItemStack[] matchingStacks = ingredients.get(index).items().filter(s -> !s.is(TFItemTags.BANNED_UNCRAFTING_INGREDIENTS)).map(p -> new ItemStack(p.value())).toArray(ItemStack[]::new);
 			stacks[i] = matchingStacks.length > 0 ? matchingStacks[Math.floorMod(this.ingredientsInCycle, matchingStacks.length)] : ItemStack.EMPTY;
 		}
 

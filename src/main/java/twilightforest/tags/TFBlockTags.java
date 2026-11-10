@@ -116,7 +116,7 @@ public class TFBlockTags {
 	public static final TagKey<Block> SUPPLEMENTARIES_MAP_GRASS = create("supplementaries", "map_tint_grass_color");
 
 	private static TagKey<Block> create(String tagName) {
-		return BlockTags.create(TwilightForestMod.prefix(tagName));
+		return net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, TwilightForestMod.prefix(tagName));
 	}
 
 	public static TagKey<Block> makeCommonTag(String tagName) {
@@ -124,6 +124,6 @@ public class TFBlockTags {
 	}
 
 	private static TagKey<Block> create(String modid, String tagName) {
-		return BlockTags.create(Identifier.fromNamespaceAndPath(modid, tagName));
+		return net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK, Identifier.fromNamespaceAndPath(modid, tagName));
 	}
 }

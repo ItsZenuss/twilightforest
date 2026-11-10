@@ -41,9 +41,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.common.Tags;
+import twilightforest.port.neoforged.neoforge.common.ItemAbilities;
+import twilightforest.port.neoforged.neoforge.common.ItemAbility;
+import twilightforest.port.neoforged.neoforge.common.Tags;
 import org.jspecify.annotations.Nullable;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.entity.CandelabraBlockEntity;
@@ -145,14 +145,13 @@ public class CandelabraBlock extends BaseEntityBlock implements LightableBlock, 
 	}
 
 	@Nullable
-	@Override
 	public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
 		if (ItemAbilities.FIRESTARTER_LIGHT == itemAbility) {
 			if (this.canBeLit(state)) {
 				return state.setValue(LIGHTING, Lighting.NORMAL);
 			}
 		}
-		return super.getToolModifiedState(state, context, itemAbility, simulate);
+		return null;
 	}
 
 	@Override
@@ -368,7 +367,6 @@ public class CandelabraBlock extends BaseEntityBlock implements LightableBlock, 
 		return super.getDrops(state, builder);
 	}
 
-	@Override
 	public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction direction) {
 		return state.getValue(LIGHTING) == Lighting.DIM && state.getValue(ON_WALL) && state.getValue(FACING).getOpposite() == direction;
 	}
@@ -420,13 +418,12 @@ public class CandelabraBlock extends BaseEntityBlock implements LightableBlock, 
 		this.updateNeighborsBasedOnRotation(level, pos, state);
 	}
 
-	@Override
 	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
 		if (level.getBlockEntity(pos) instanceof CandelabraBlockEntity candelabra && candelabra.getCandles() != CandelabraData.EMPTY) {
 			ItemStack itemstack = new ItemStack(this);
 			itemstack.applyComponents(candelabra.collectComponents());
 			return itemstack;
 		}
-		return super.getCloneItemStack(level, pos, state, includeData, player);
+		return super.getCloneItemStack(level, pos, state, includeData);
 	}
 }

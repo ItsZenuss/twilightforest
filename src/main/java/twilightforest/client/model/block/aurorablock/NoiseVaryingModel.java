@@ -8,8 +8,8 @@ import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
-import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.DelegateBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import twilightforest.util.SimplexNoiseHelper;
 
 import java.util.List;
@@ -25,17 +25,17 @@ public class NoiseVaryingModel extends DelegateBlockStateModel implements Dynami
 
 	@Override
 	public void collectParts(BlockAndTintGetter level, BlockPos pos, BlockState state, RandomSource random, List<BlockStateModelPart> parts) {
-		this.chooseVariant(pos).collectParts(level, pos, state, random, parts);
+		this.chooseVariant(pos).collectParts(random, parts);
 	}
 
 	@Override
 	public Material.Baked particleMaterial(BlockAndTintGetter level, BlockPos pos, BlockState state) {
-		return this.chooseVariant(pos).particleMaterial(level, pos, state);
+		return this.chooseVariant(pos).particleMaterial();
 	}
 
 	@Override
 	public @MaterialFlags int materialFlags(BlockAndTintGetter level, BlockPos pos, BlockState state) {
-		return this.chooseVariant(pos).materialFlags(level, pos, state);
+		return this.chooseVariant(pos).materialFlags();
 	}
 
 	private BlockStateModel chooseVariant(BlockPos pos) {

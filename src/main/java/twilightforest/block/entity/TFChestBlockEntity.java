@@ -13,12 +13,12 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.storage.ValueInput;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
-import net.neoforged.neoforge.transfer.CombinedResourceHandler;
-import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
-import net.neoforged.neoforge.transfer.transaction.TransactionContext;
+import twilightforest.port.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
+import twilightforest.port.neoforged.neoforge.transfer.CombinedResourceHandler;
+import twilightforest.port.neoforged.neoforge.transfer.ResourceHandler;
+import twilightforest.port.neoforged.neoforge.transfer.item.ItemResource;
+import twilightforest.port.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import twilightforest.port.neoforged.neoforge.transfer.transaction.TransactionContext;
 import org.jspecify.annotations.Nullable;
 import twilightforest.init.TFBlockEntities;
 

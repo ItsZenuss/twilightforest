@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
 import org.jspecify.annotations.Nullable;
 import twilightforest.init.TFAdvancements;
 import twilightforest.init.TFDataComponents;

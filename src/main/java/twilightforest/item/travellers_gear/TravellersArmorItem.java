@@ -28,7 +28,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.Equippable;
-import net.neoforged.neoforge.common.util.ConcatenatedListView;
+import twilightforest.port.neoforged.neoforge.common.util.ConcatenatedListView;
 import org.jspecify.annotations.Nullable;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.model.TFModelLayers;

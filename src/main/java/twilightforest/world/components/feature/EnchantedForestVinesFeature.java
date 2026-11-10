@@ -97,7 +97,7 @@ public class EnchantedForestVinesFeature extends Feature<NoneFeatureConfiguratio
 	}
 
 	private boolean isSuitableBiome(WorldGenLevel world, BlockPos pos) {
-		return Objects.requireNonNull(world.getBiome(pos).getKey()).identifier().getPath().equals("enchanted_forest");
+		return Objects.requireNonNull(world.getBiome(pos).unwrapKey().orElse(null)).identifier().getPath().equals("enchanted_forest");
 	}
 
 	private boolean isTree(BlockState state) {

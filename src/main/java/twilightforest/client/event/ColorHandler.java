@@ -10,7 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import twilightforest.port.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.ClimbableHollowLogBlock;
 import twilightforest.client.properties.PotionFlaskTintSource;
@@ -28,7 +28,7 @@ public class ColorHandler {
 	public static final Int2IntFunction MANGROVE_COLORIZER = color -> 0xFF000000 | (((color & 0xFEFEFE) + 0xC0E694) / 2);
 
 	protected static void registerBlockColors(RegisterColorHandlersEvent.BlockTintSources event) {
-		BlockColors blockColors = event.getBlockColors();
+		// Fabric port: block colours are read lazily from Minecraft when a tint is computed
 
 		event.register(List.of(new BlockTintSource() {
 			@Override
@@ -43,7 +43,7 @@ public class ColorHandler {
 		}), TFBlocks.AURORA_BLOCK.get());
 		event.register(List.of(state -> {
 			//TODO: Verify this. It's kind of how you get the color
-			int normalColor = blockColors.getTintSource(TFBlocks.AURORA_BLOCK.get().defaultBlockState(), 0).color(TFBlocks.AURORA_BLOCK.get().defaultBlockState());
+			int normalColor = net.minecraft.client.Minecraft.getInstance().getBlockColors().getTintSource(TFBlocks.AURORA_BLOCK.get().defaultBlockState(), 0).color(TFBlocks.AURORA_BLOCK.get().defaultBlockState());
 
 			int red = (normalColor >> 16) & 255;
 			int blue = normalColor & 255;

@@ -47,7 +47,6 @@ public class TFChestRenderer<T extends ChestBlockEntity> extends ChestRenderer<T
 		super(context);
 	}
 
-	@Override
 	protected @Nullable SpriteId getCustomSprite(T blockEntity, ChestRenderState renderState) {
 		return MATERIALS.get(blockEntity.getBlockState().getBlock()).get(renderState.type);
 	}

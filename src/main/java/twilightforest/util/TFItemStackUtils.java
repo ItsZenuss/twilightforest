@@ -21,7 +21,7 @@ import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ItemLike;
-import org.codehaus.plexus.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.KeepsakeCasketBlock;
 import twilightforest.events.CharmEvents;
@@ -103,7 +103,7 @@ public class TFItemStackUtils {
 
 	public static boolean hasInfoTag(ItemStack stack, String key) {
 		CustomData customData = stack.get(DataComponents.CUSTOM_DATA);
-		return customData != null && customData.contains(key);
+		return customData != null && customData.copyTag().contains(key);
 	}
 
 	public static void addInfoTag(ItemStack stack, String key) {

@@ -23,6 +23,7 @@ public class PeacockFanItem extends Item {
 
 	public PeacockFanItem(Properties properties) {
 		super(properties);
+		tamaized.beanification.BeanContext.inject(this);
 	}
 
 	@Override

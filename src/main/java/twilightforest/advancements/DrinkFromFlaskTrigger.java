@@ -21,6 +21,10 @@ import java.util.Optional;
 
 @Configurable
 public class DrinkFromFlaskTrigger extends SimpleCriterionTrigger<DrinkFromFlaskTrigger.TriggerInstance> {
+	public DrinkFromFlaskTrigger() {
+		tamaized.beanification.BeanContext.inject(this);
+	}
+
 
 	@Autowired
 	private TriggerInstance.DrinkFromFlaskTriggerInstanceFactory factory;

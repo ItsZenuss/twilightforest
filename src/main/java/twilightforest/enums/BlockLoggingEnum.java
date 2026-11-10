@@ -107,7 +107,6 @@ public enum BlockLoggingEnum implements StringRepresentable {
 			return Optional.empty();
 		}
 
-		@Override
 		default Optional<SoundEvent> getPickupSound(BlockState state) {
 			return state.getValue(MULTILOGGED).fluid.getPickupSound();
 		}

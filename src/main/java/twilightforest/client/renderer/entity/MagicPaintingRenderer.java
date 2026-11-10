@@ -338,6 +338,7 @@ public class MagicPaintingRenderer extends EntityRenderer<MagicPainting, MagicPa
 		state.texture = MagicPaintingVariant.getVariantIdentifier(painting.level().registryAccess(), variant);
 		state.yRot = Mth.lerp(partialTick, painting.yRotO, painting.getYRot());
 		state.position = painting.position();
+		state.partialTick = partialTick;
 
 		int widthAsBlock = variant.width() / 16;
 		int heightAsBlock = variant.height() / 16;

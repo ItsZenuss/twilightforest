@@ -1,7 +1,7 @@
 package twilightforest.config;
 
 import net.minecraft.server.permissions.PermissionLevel;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import twilightforest.port.neoforged.neoforge.common.ModConfigSpec;
 
 public class TFCommonConfig {
 

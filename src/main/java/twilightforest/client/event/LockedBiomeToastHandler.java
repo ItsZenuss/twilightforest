@@ -3,7 +3,7 @@ package twilightforest.client.event;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
+import twilightforest.port.neoforged.neoforge.client.event.ClientTickEvent;
 import twilightforest.client.LockedBiomeToast;
 import twilightforest.config.TFConfig;
 import twilightforest.util.Restriction;

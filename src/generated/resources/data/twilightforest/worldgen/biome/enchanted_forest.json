@@ -18,7 +18,7 @@
   "effects": {
     "foliage_color": "#00ffff",
     "grass_color": "#00ffff",
-    "grass_color_modifier": "twilightforest:enchanted_forest",
+    "grass_color_modifier": "none",
     "water_color": "#3f76e4"
   },
   "features": [

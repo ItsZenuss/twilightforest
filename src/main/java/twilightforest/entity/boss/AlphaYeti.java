@@ -33,7 +33,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.EventHooks;
+import twilightforest.port.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.entity.IHostileMount;
 import twilightforest.entity.ai.goal.ThrowRiderGoal;
@@ -209,7 +209,6 @@ public class AlphaYeti extends BaseTFBoss implements RangedAttackMob, IHostileMo
 		return super.getPassengerAttachmentPoint(entity, dimensions, yRot).add(0.0F, 0F, 0.4F);
 	}
 
-	@Override
 	public boolean canRiderInteract() {
 		return true;
 	}

@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.DelegateBlockStateModel;
-import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.DelegateBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import twilightforest.block.entity.ReactorDebrisBlockEntity;
 import twilightforest.client.renderer.block.ReactorDebrisRenderer;
 

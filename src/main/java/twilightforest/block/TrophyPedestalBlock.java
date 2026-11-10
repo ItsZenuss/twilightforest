@@ -169,7 +169,6 @@ public class TrophyPedestalBlock extends Block implements SimpleWaterloggedBlock
 		return 0;
 	}
 
-	@Override
 	public PushReaction getPistonPushReaction(BlockState state) {
 		return state.getValue(ACTIVE) ? PushReaction.NORMAL : PushReaction.BLOCK;
 	}

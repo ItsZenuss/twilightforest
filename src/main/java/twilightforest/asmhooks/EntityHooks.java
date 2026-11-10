@@ -8,8 +8,8 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.NeoForgeMod;
-import net.neoforged.neoforge.fluids.InFluidPredicate;
+import twilightforest.port.neoforged.neoforge.common.NeoForgeMod;
+import twilightforest.port.neoforged.neoforge.fluids.InFluidPredicate;
 import twilightforest.init.TFDataAttachments;
 import twilightforest.init.custom.TravellersModifiersManager;
 import twilightforest.item.travellers_gear.TravellersGearLogic;
@@ -30,7 +30,7 @@ public class EntityHooks {
 			return o;
 
 		boolean isWaterWalking = TravellersGearLogic.isWaterWalking(livingEntity);
-		if (livingEntity.getFluidTypeHeight(NeoForgeMod.WATER_TYPE.value()) > 0 && isWaterWalking && livingEntity.level().getGameTime() % 3 == 1)
+		if (livingEntity.getFluidHeight(FluidTags.WATER) > 0 && isWaterWalking && livingEntity.level().getGameTime() % 3 == 1)
 			TravellersGearLogic.waterWalkingSplashEffect(livingEntity);
 		return isWaterWalking;
 	}

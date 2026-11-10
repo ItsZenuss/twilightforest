@@ -13,7 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.Tags;
+import twilightforest.port.neoforged.neoforge.common.Tags;
 import org.jspecify.annotations.Nullable;
 import twilightforest.block.DryingRackBlock;
 import twilightforest.block.entity.DryingRackBlockEntity;

@@ -3,8 +3,8 @@ package twilightforest.init;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import twilightforest.port.neoforged.neoforge.registries.DeferredHolder;
+import twilightforest.port.neoforged.neoforge.registries.DeferredRegister;
 import twilightforest.TwilightForestMod;
 import twilightforest.item.recipe.*;
 import twilightforest.item.recipe.travellers.TravellersGearModifierShapedRecipe;
@@ -26,6 +26,6 @@ public class TFRecipes {
 	public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<ComponentAttachingSmithingRecipe>> NO_TEMPLATE_SMITHING_SERIALIZER = RECIPE_SERIALIZERS.register("no_template_smithing", () -> ComponentAttachingSmithingRecipe.SERIALIZER);
 	public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<DryingRecipe>> DRYING_SERIALIZER = RECIPE_SERIALIZERS.register("drying", () -> DryingRecipe.SERIALIZER);
 
-	public static final DeferredHolder<RecipeType<?>, RecipeType<UncraftingRecipe>> UNCRAFTING_RECIPE = RECIPE_TYPES.register("uncrafting", () -> RecipeType.simple(TwilightForestMod.prefix("uncrafting")));
-	public static final DeferredHolder<RecipeType<?>, RecipeType<DryingRecipe>> DRYING_RECIPE = RECIPE_TYPES.register("drying", () -> RecipeType.simple(TwilightForestMod.prefix("drying")));
+	public static final DeferredHolder<RecipeType<?>, RecipeType<UncraftingRecipe>> UNCRAFTING_RECIPE = RECIPE_TYPES.register("uncrafting", () -> new RecipeType<>() { @Override public String toString() { return "twilightforest:uncrafting"; } });
+	public static final DeferredHolder<RecipeType<?>, RecipeType<DryingRecipe>> DRYING_RECIPE = RECIPE_TYPES.register("drying", () -> new RecipeType<>() { @Override public String toString() { return "twilightforest:drying"; } });
 }

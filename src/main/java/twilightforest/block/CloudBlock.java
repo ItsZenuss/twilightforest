@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jspecify.annotations.Nullable;
 import twilightforest.config.TFConfig;
@@ -128,7 +128,6 @@ public class CloudBlock extends Block {
 		}
 	}
 
-	@Override
 	public boolean addLandingEffects(BlockState state1, ServerLevel level, BlockPos pos, BlockState state2, LivingEntity living, int numberOfParticles) { // ServerSide
 		ParticlePacket particlePacket = new ParticlePacket();
 		int maxI = Mth.clamp((int) living.fallDistance * 2, 8, 40);
@@ -169,7 +168,6 @@ public class CloudBlock extends Block {
 		return entity.tickCount % 2 == 0 && !entity.isSpectator();
 	}
 
-	@Override
 	public boolean addRunningEffects(BlockState state, Level level, BlockPos pos, Entity entity) { // Client & Server Side
 		if (level.isClientSide() && state.getRenderShape() != RenderShape.INVISIBLE) {
 			addEntityMovementParticles(level, pos, entity, false);

@@ -2,7 +2,6 @@ package twilightforest.asmhooks;
 
 import net.minecraft.world.entity.Entity;
 import tamaized.beanification.Autowired;
-import twilightforest.asm.transformers.multipart.SendDirtyEntityDataTransformer;
 import twilightforest.util.multiparts.MultipartEntityUtil;
 
 @SuppressWarnings({"JavadocReference", "unused"})

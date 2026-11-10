@@ -5,7 +5,7 @@
     "i": "#c:nuggets/iron",
     "l": "twilightforest:tanned_leather",
     "x": {
-      "neoforge:ingredient_type": "neoforge:difference",
+      "fabric:type": "fabric:difference",
       "base": "#c:chests/wooden",
       "subtracted": "#c:chests/trapped"
     }

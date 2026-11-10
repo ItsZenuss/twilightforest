@@ -13,6 +13,10 @@ import twilightforest.action.PeacockFeatherFanAction;
 
 @Configurable
 public class FeatherFanDispenseBehavior extends DefaultDispenseItemBehavior {
+	public FeatherFanDispenseBehavior() {
+		tamaized.beanification.BeanContext.inject(this);
+	}
+
 
 	@Autowired
 	private PeacockFeatherFanAction peacockFeatherFanAction;

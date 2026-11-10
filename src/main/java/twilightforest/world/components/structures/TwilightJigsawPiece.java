@@ -20,7 +20,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSeriali
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
-import net.neoforged.neoforge.common.world.PieceBeardifierModifier;
+import twilightforest.port.neoforged.neoforge.common.world.PieceBeardifierModifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tamaized.beanification.Autowired;

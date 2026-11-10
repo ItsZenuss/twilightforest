@@ -22,18 +22,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.util.BlockSnapshot;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.event.level.GameRuleChangedEvent;
-import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.common.util.BlockSnapshot;
+import twilightforest.port.neoforged.neoforge.common.util.FakePlayer;
+import twilightforest.port.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.player.PlayerEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import twilightforest.port.neoforged.neoforge.event.level.BlockEvent;
+import twilightforest.port.neoforged.neoforge.event.level.GameRuleChangedEvent;
+import twilightforest.port.neoforged.neoforge.event.level.block.BreakBlockEvent;
+import twilightforest.port.neoforged.neoforge.event.tick.PlayerTickEvent;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.server.ServerLifecycleHooks;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
 import twilightforest.block.TFPortalBlock;
@@ -67,14 +67,14 @@ public class ProgressionEvents {
 
 	@PostConstruct
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(this::gameRuleChanged);
-		NeoForge.EVENT_BUS.addListener(this::preventLockedAreaBlockBreaking);
-		NeoForge.EVENT_BUS.addListener(this::preventLockedAreaBlockPlacing);
-		NeoForge.EVENT_BUS.addListener(this::preventLockedAreaBlockInteracting);
-		NeoForge.EVENT_BUS.addListener(this::preventLockedAreaMultiblocks);
-		NeoForge.EVENT_BUS.addListener(this::preventLockedAreaEntityDamage);
-		NeoForge.EVENT_BUS.addListener(this::performProtectionAndPortalChecks);
-		NeoForge.EVENT_BUS.addListener(this::syncProgressionGameRuleStatus);
+		NeoForge.EVENT_BUS.addListener(GameRuleChangedEvent.class, this::gameRuleChanged);
+		NeoForge.EVENT_BUS.addListener(BreakBlockEvent.class, this::preventLockedAreaBlockBreaking);
+		NeoForge.EVENT_BUS.addListener(PlayerInteractEvent.RightClickBlock.class, this::preventLockedAreaBlockPlacing);
+		NeoForge.EVENT_BUS.addListener(PlayerInteractEvent.RightClickBlock.class, this::preventLockedAreaBlockInteracting);
+		NeoForge.EVENT_BUS.addListener(BlockEvent.EntityMultiPlaceEvent.class, this::preventLockedAreaMultiblocks);
+		NeoForge.EVENT_BUS.addListener(LivingIncomingDamageEvent.class, this::preventLockedAreaEntityDamage);
+		NeoForge.EVENT_BUS.addListener(PlayerTickEvent.Post.class, this::performProtectionAndPortalChecks);
+		NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedInEvent.class, this::syncProgressionGameRuleStatus);
 	}
 
 	/**

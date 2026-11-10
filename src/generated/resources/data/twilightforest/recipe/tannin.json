@@ -3,13 +3,13 @@
   "category": "misc",
   "ingredients": [
     {
-      "neoforge:ingredient_type": "neoforge:components",
+      "fabric:type": "fabric:components",
+      "base": "minecraft:potion",
       "components": {
         "minecraft:potion_contents": {
           "potion": "minecraft:water"
         }
-      },
-      "items": "minecraft:potion"
+      }
     },
     "twilightforest:twilight_oak_sapling",
     "twilightforest:root_strand",

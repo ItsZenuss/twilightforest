@@ -13,7 +13,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.StructurePieceAccessor;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import twilightforest.port.neoforged.neoforge.server.ServerLifecycleHooks;
 import tamaized.beanification.Autowired;
 import twilightforest.TwilightForestMod;
 import twilightforest.init.TFBlocks;

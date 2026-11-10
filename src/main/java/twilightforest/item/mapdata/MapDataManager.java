@@ -2,7 +2,7 @@ package twilightforest.item.mapdata;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.maps.MapId;
-import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import twilightforest.port.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;

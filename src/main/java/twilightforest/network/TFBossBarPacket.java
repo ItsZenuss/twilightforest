@@ -8,7 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.game.ClientboundBossEventPacket;
 import net.minecraft.world.BossEvent;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import twilightforest.port.neoforged.neoforge.network.handling.IPayloadContext;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.boss.bar.ClientTFBossBar;
 import twilightforest.entity.boss.bar.ServerTFBossBar;
@@ -82,7 +82,7 @@ public abstract class TFBossBarPacket implements CustomPacketPayload {
 
 		@SuppressWarnings("Convert2Lambda")
 		public static void handle(AddTFBossBarPacket packet, IPayloadContext ctx) {
-			if (ctx.flow().isClientbound()) {
+			if (ctx.flow() == net.minecraft.network.protocol.PacketFlow.CLIENTBOUND) {
 				ctx.enqueueWork(new Runnable() {
 					@Override
 					public void run() {
@@ -131,7 +131,7 @@ public abstract class TFBossBarPacket implements CustomPacketPayload {
 
 		@SuppressWarnings("Convert2Lambda")
 		public static void handle(UpdateTFBossBarStylePacket packet, IPayloadContext ctx) {
-			if (ctx.flow().isClientbound()) {
+			if (ctx.flow() == net.minecraft.network.protocol.PacketFlow.CLIENTBOUND) {
 				ctx.enqueueWork(new Runnable() {
 					@Override
 					public void run() {

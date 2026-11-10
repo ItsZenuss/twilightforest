@@ -36,7 +36,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import twilightforest.port.neoforged.neoforge.registries.DeferredBlock;
 import twilightforest.block.entity.OminousCandleBlockEntity;
 import twilightforest.init.TFBlocks;
 import twilightforest.init.TFParticleType;
@@ -168,7 +168,7 @@ public class OminousCandleBlock extends BaseEntityBlock {
 
 				BlockState newState = level.getBlockState(pos);
 
-				SoundType soundtype = newState.getSoundType(level, pos, player);
+				SoundType soundtype = newState.getSoundType();
 				level.playSound(
 					player,
 					pos,

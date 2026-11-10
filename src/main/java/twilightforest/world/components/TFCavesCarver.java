@@ -275,8 +275,7 @@ public class TFCavesCarver extends WorldCarver<CaveCarverConfiguration> {
 	}
 
 	@Nullable
-	@Override
-	public BlockState getCarveState(CarvingContext context, CaveCarverConfiguration config, BlockPos pos, Aquifer aquifer) {
+		public BlockState getTFCarveState(CarvingContext context, CaveCarverConfiguration config, BlockPos pos, Aquifer aquifer) {
 		return Blocks.CAVE_AIR.defaultBlockState();
 	}
 }

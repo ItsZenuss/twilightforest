@@ -18,9 +18,9 @@ import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.event.level.BlockEvent;
+import twilightforest.port.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import twilightforest.entity.projectile.ChainBlock;
 import twilightforest.init.TFDataAttachments;
 

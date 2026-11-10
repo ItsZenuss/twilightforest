@@ -90,11 +90,10 @@ public class JarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock 
 		return TFBlocks.TWILIGHT_OAK_LOG.asItem();
 	}
 
-	@Override
 	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
 		return level.getBlockEntity(pos) instanceof JarBlockEntity jarBlockEntity
 			? jarBlockEntity.getJarAsItem()
-			: super.getCloneItemStack(level, pos, state, includeData, player);
+			: super.getCloneItemStack(level, pos, state, includeData);
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package twilightforest.asmhooks;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import twilightforest.asm.transformers.player.ReduceMovementFoodExhaustionTransformer;
 import twilightforest.init.TFDataComponents;
 import twilightforest.init.custom.TravellersModifiersManager;
 

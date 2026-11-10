@@ -24,7 +24,7 @@ public class CasketRepairExtension implements ICraftingCategoryExtension<CasketR
 
 	@Override
 	public void setRecipe(RecipeHolder<CasketRepairRecipe> recipeHolder, IRecipeLayoutBuilder builder, ICraftingGridHelper craftingGridHelper, IFocusGroup focuses) {
-		ItemStack casket = new ItemStack(TFItems.KEEPSAKE_CASKET, 1, DataComponentPatch.builder().set(TFDataComponents.CASKET_DAMAGE.get(), 2).build());
+		ItemStack casket = new ItemStack(TFItems.KEEPSAKE_CASKET, 1, DataComponentPatch.builder().set(TFDataComponents.CASKET_DAMAGE, 2).build());
 		List<List<ItemStack>> inputs = new ArrayList<>();
 		inputs.add(List.of(casket));
 		inputs.add(List.of(TFItems.CHARM_OF_KEEPING_3.toStack()));
@@ -32,7 +32,7 @@ public class CasketRepairExtension implements ICraftingCategoryExtension<CasketR
 		craftingGridHelper.createAndSetInputs(builder, inputs, 0, 0);
 		builder.setShapeless();
 
-		ItemStack repairedCasket = new ItemStack(TFItems.KEEPSAKE_CASKET, 1, DataComponentPatch.builder().set(TFDataComponents.CASKET_DAMAGE.get(), 1).build());
+		ItemStack repairedCasket = new ItemStack(TFItems.KEEPSAKE_CASKET, 1, DataComponentPatch.builder().set(TFDataComponents.CASKET_DAMAGE, 1).build());
 		craftingGridHelper.createAndSetOutputs(builder, List.of(repairedCasket));
 	}
 }

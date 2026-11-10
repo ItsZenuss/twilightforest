@@ -12,9 +12,7 @@ import net.minecraft.client.resources.model.cuboid.FaceBakery;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
-import net.neoforged.neoforge.client.model.ExtraFaceData;
-import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
-import org.apache.commons.lang3.mutable.MutableObject;
+import twilightforest.port.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,14 +33,12 @@ public record UnbakedForceFieldBlockStateModel(Material texture, boolean ambient
 		List<ForceFieldModel.BakedElement> bakedElements = new ArrayList<>();
 
 		for (ForceFieldElement element : this.elements) {
-			ExtraFaceData faceData = new ExtraFaceData(ExtraFaceData.DEFAULT.color(), element.lightEmission(), this.ambientOcclusion);
-
 			for (Map.Entry<Direction, ForceFieldElement.Face> entry : element.faces().entrySet()) {
 				Direction side = entry.getKey();
 				ForceFieldElement.Face face = entry.getValue();
 				Direction cullFace = face.cullFace().orElse(null);
 
-				CuboidFace cuboidFace = new CuboidFace(cullFace, face.tintIndex(), textureName, face.uvs().orElse(null), Quadrant.R0, faceData, new MutableObject<>());
+				CuboidFace cuboidFace = new CuboidFace(cullFace, face.tintIndex(), textureName, face.uvs().orElse(null), Quadrant.R0);
 				BakedQuad quad = FaceBakery.bakeQuad(
 					modelBaker,
 					element.from(),

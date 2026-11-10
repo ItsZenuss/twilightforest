@@ -32,8 +32,8 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.entity.PartEntity;
-import net.neoforged.neoforge.event.EventHooks;
+import twilightforest.port.neoforged.neoforge.entity.PartEntity;
+import twilightforest.port.neoforged.neoforge.event.EventHooks;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.entity.TFPart;
 import twilightforest.init.*;
@@ -675,9 +675,7 @@ public class Hydra extends BaseTFBoss {
 		this.repositionParts();
 	}
 
-	@Override
 	public void sendPairingData(ServerPlayer serverPlayer, Consumer<CustomPacketPayload> bundleBuilder) {
-		super.sendPairingData(serverPlayer, bundleBuilder);
 		bundleBuilder.accept(new UpdateTFMultipartPacket(this, TFPart::writePairingData));
 	}
 

@@ -10,12 +10,12 @@ import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
-import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.transfer.transaction.Transaction;
+import twilightforest.port.neoforged.neoforge.capabilities.Capabilities;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.transfer.ResourceHandler;
+import twilightforest.port.neoforged.neoforge.transfer.ResourceHandlerUtil;
+import twilightforest.port.neoforged.neoforge.transfer.item.ItemResource;
+import twilightforest.port.neoforged.neoforge.transfer.transaction.Transaction;
 import twilightforest.config.TFConfig;
 import twilightforest.init.TFParticleType;
 import twilightforest.network.ParticlePacket;
@@ -81,7 +81,7 @@ public class SortLogCoreBlock extends SpecialMagicLogBlock {
 		level.getEntities((Entity) null, new AABB(pos).inflate(2), entity -> entity.isAlive() && entity.is(TFEntityTypeTags.SORTABLE_ENTITIES)).forEach(entity -> {
 			List<ResourceHandler<ItemResource>> handlers = new ArrayList<>();
 			for (Direction side : Direction.values()) {
-				ResourceHandler<ItemResource> handler = entity.getCapability(Capabilities.Item.ENTITY_AUTOMATION, side);
+				ResourceHandler<ItemResource> handler = Capabilities.getEntityCapability(entity, Capabilities.Item.ENTITY_AUTOMATION, side);
 				if (handler != null) handlers.add(handler);
 			}
 			if (!handlers.isEmpty()) {
@@ -94,7 +94,7 @@ public class SortLogCoreBlock extends SpecialMagicLogBlock {
 
 		level.getEntities((Entity) null, new AABB(pos).inflate(16), entity -> entity.isAlive() && !alreadyUsedForInput.contains(entity) && entity.is(TFEntityTypeTags.SORTABLE_ENTITIES)).forEach(entity -> {
 			for (Direction side : Direction.values()) {
-				ResourceHandler<ItemResource> handler = entity.getCapability(Capabilities.Item.ENTITY_AUTOMATION, side);
+				ResourceHandler<ItemResource> handler = Capabilities.getEntityCapability(entity, Capabilities.Item.ENTITY_AUTOMATION, side);
 				if (handler != null) outputMap.put(handler, entity.position().add(0D, entity.getBbHeight() + 0.9D, 0D));
 			}
 		});

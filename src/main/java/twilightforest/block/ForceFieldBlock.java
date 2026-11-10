@@ -73,7 +73,6 @@ public class ForceFieldBlock extends Block implements SimpleWaterloggedBlock {
 			(state.getBlock() instanceof ForceFieldBlock && state.getValue(PipeBlock.PROPERTY_BY_DIRECTION.get(similar)));
 	}
 
-	@Override
 	public boolean canEntityDestroy(BlockState state, BlockGetter getter, BlockPos pos, Entity entity) {
 		return false;
 	}

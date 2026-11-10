@@ -16,7 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.storage.LevelResource;
-import net.neoforged.fml.loading.FMLEnvironment;
+import twilightforest.port.neoforged.fml.loading.FMLEnvironment;
 import twilightforest.init.TFBiomes;
 import twilightforest.init.TFDataMaps;
 import twilightforest.util.ColorUtil;

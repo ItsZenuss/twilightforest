@@ -89,7 +89,7 @@ public class CountLootCommand {
 
 			Item lootItem = countedItem.getKey();
 
-			var rarityColor = new ItemStack(lootItem).getRarity().getStyleModifier();
+			var rarityColor = new ItemStack(lootItem).getRarity().color();
 
 			Component message = Component.translatable(lootItem.getDescriptionId()).withStyle(rarityColor).append(suffixCount);
 

@@ -108,14 +108,12 @@ public class VanishingBlock extends Block {
 		return InteractionResult.PASS;
 	}
 
-	@Override
 	public float getExplosionResistance(BlockState state, BlockGetter getter, BlockPos pos, Explosion explosion) {
-		return !state.getValue(ACTIVE) ? 6000F : super.getExplosionResistance(state, getter, pos, explosion);
+		return !state.getValue(ACTIVE) ? 6000F : this.getExplosionResistance();
 	}
 
-	@Override
 	public boolean canEntityDestroy(BlockState state, BlockGetter getter, BlockPos pos, Entity entity) {
-		return !state.getValue(ACTIVE) ? !areBlocksLocked(getter, pos) : super.canEntityDestroy(state, getter, pos, entity);
+		return !state.getValue(ACTIVE) ? !areBlocksLocked(getter, pos) : true;
 	}
 
 	@Override

@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.neoforged.neoforge.client.gui.map.IMapDecorationRenderer;
+import twilightforest.port.neoforged.neoforge.client.gui.map.IMapDecorationRenderer;
 import twilightforest.TwilightForestMod;
 import twilightforest.item.mapdata.TFMagicMapData;
 

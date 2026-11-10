@@ -180,17 +180,15 @@ public abstract class TFBushBlock extends Block implements SnowLoggable {
 		super.spawnDestroyParticles(level, player, pos, state);
 	}
 
-	@Override
 	public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, ItemStack toolStack, boolean willHarvest, FluidState fluid) {
 		if (!player.isSecondaryUseActive() && state.getValue(SNOW_LAYERS) > MIN_SNOW_LAYERS) {
 			this.handleBreakingLogic(level, pos, state, player, null);
 			return false;
 		}
-		return super.onDestroyedByPlayer(state, level, pos, player, toolStack, willHarvest, fluid);
+		return level.destroyBlock(pos, willHarvest, player);
 	}
 
 	@Nullable
-	@Override
 	public PushReaction getPistonPushReaction(BlockState state) {
 		return state.getValue(AGE) < 2 ? PushReaction.DESTROY : null;
 	}

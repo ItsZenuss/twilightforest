@@ -23,7 +23,7 @@ public class ServerTFBossBar extends ServerBossEvent {
 	@Override
 	public void addPlayer(ServerPlayer player) {
 		if (this.players.add(player) && this.visible) {
-			player.connection.send(new TFBossBarPacket.AddTFBossBarPacket(this));
+			twilightforest.port.neoforged.neoforge.network.PacketDistributor.sendToPlayer(player, new TFBossBarPacket.AddTFBossBarPacket(this));
 		}
 	}
 
@@ -34,7 +34,7 @@ public class ServerTFBossBar extends ServerBossEvent {
 			setDirty();
 			for (ServerPlayer player : players) {
 				if (visible) {
-					player.connection.send(new TFBossBarPacket.AddTFBossBarPacket(this));
+					twilightforest.port.neoforged.neoforge.network.PacketDistributor.sendToPlayer(player, new TFBossBarPacket.AddTFBossBarPacket(this));
 				} else {
 					player.connection.send(ClientboundBossEventPacket.createRemovePacket(getId()));
 				}
@@ -52,6 +52,6 @@ public class ServerTFBossBar extends ServerBossEvent {
 			this.overlay = overlay;
 			change = true;
 		}
-		if (change) this.players.forEach(serverPlayer -> serverPlayer.connection.send(new TFBossBarPacket.UpdateTFBossBarStylePacket(this, allowLerp)));
+		if (change) this.players.forEach(serverPlayer -> twilightforest.port.neoforged.neoforge.network.PacketDistributor.sendToPlayer(serverPlayer, new TFBossBarPacket.UpdateTFBossBarStylePacket(this, allowLerp)));
 	}
 }

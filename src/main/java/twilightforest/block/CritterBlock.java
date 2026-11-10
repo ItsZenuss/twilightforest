@@ -128,13 +128,13 @@ public abstract class CritterBlock extends BaseEntityBlock {
 			ItemContainerContents contents = stack.getComponents().get(DataComponents.CONTAINER);
 			if (contents == null || contents.copyOne().isEmpty()) {
 				if (this == TFBlocks.FIREFLY.get()) {
-					ItemStack newStack = Util.make(new ItemStack(TFBlocks.FIREFLY_JAR.get()), jar -> jar.set(TFDataComponents.JAR_LID.get(), stack.get(TFDataComponents.JAR_LID.get())));
+					ItemStack newStack = Util.make(new ItemStack(TFBlocks.FIREFLY_JAR.get()), jar -> jar.set(TFDataComponents.JAR_LID, stack.get(TFDataComponents.JAR_LID)));
 					stack.consume(1, player);
 					player.getInventory().add(newStack);
 					level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 					return InteractionResult.SUCCESS;
 				} else if (this == TFBlocks.CICADA.get()) {
-					ItemStack newStack = Util.make(new ItemStack(TFBlocks.CICADA_JAR.get()), jar -> jar.set(TFDataComponents.JAR_LID.get(), stack.get(TFDataComponents.JAR_LID.get())));
+					ItemStack newStack = Util.make(new ItemStack(TFBlocks.CICADA_JAR.get()), jar -> jar.set(TFDataComponents.JAR_LID, stack.get(TFDataComponents.JAR_LID)));
 					stack.consume(1, player);
 					player.getInventory().add(newStack);
 					if (level.isClientSide())

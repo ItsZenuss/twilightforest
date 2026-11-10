@@ -30,7 +30,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.ai.goal.HeavySpearAttackGoal;
 import twilightforest.init.TFSounds;

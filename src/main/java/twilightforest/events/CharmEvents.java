@@ -22,19 +22,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.material.FluidState;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.registries.DeferredItem;
+import twilightforest.port.neoforged.bus.api.EventPriority;
+import twilightforest.port.neoforged.fml.ModList;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.common.util.FakePlayer;
+import twilightforest.port.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.player.PlayerEvent;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.registries.DeferredItem;
 import tamaized.beanification.PostConstruct;
 import twilightforest.TwilightForestMod;
 import twilightforest.block.KeepsakeCasketBlock;
 import twilightforest.block.entity.SkullChestBlockEntity;
-import twilightforest.compat.curios.CuriosCompat;
+import twilightforest.compat.trinkets.TrinketsCompat;
 import twilightforest.components.entity.CharmAttachment;
 import twilightforest.config.TFConfig;
 import twilightforest.init.*;
@@ -61,9 +61,9 @@ public class CharmEvents {
 
 	@PostConstruct
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::applyCharmOfLife);
-		NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, this::applyKeepingAndCasket);
-		NeoForge.EVENT_BUS.addListener(this::returnItemsOnRespawn);
+		NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, LivingDeathEvent.class, this::applyCharmOfLife);
+		NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, LivingDeathEvent.class, this::applyKeepingAndCasket);
+		NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerRespawnEvent.class, this::returnItemsOnRespawn);
 	}
 
 	// Check for charm of life first to stop a player from dying
@@ -350,16 +350,18 @@ public class CharmEvents {
 		}
 	}
 
+	public static final String PERSISTED_NBT_TAG = "PlayerPersisted";
+
 	public static CompoundTag getPlayerData(Player player) {
-		if (!player.getPersistentData().contains(Player.PERSISTED_NBT_TAG)) {
-			player.getPersistentData().put(Player.PERSISTED_NBT_TAG, new CompoundTag());
+		if (!player.getPersistentData().contains(PERSISTED_NBT_TAG)) {
+			player.getPersistentData().put(PERSISTED_NBT_TAG, new CompoundTag());
 		}
-		return player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG).get();
+		return player.getPersistentData().getCompound(PERSISTED_NBT_TAG).get();
 	}
 
 	private static boolean hasCharmCurio(Item item, Player player, boolean saveItemToTag) {
-		if (ModList.get().isLoaded("curios")) {
-			return CuriosCompat.findAndConsumeCurio(item, player, saveItemToTag);
+		if (ModList.get().isLoaded("trinkets")) {
+			return TrinketsCompat.findAndConsumeTrinket(item, player, saveItemToTag);
 		}
 
 		return false;

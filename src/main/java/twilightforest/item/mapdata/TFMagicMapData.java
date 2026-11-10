@@ -132,7 +132,7 @@ public class TFMagicMapData extends MapItemSavedData {
 	@Override
 	public Packet<?> getUpdatePacket(MapId mapId, Player player) {
 		Packet<?> packet = super.getUpdatePacket(mapId, player);
-		return packet instanceof ClientboundMapItemDataPacket mapItemDataPacket ? new MagicMapPacket(mapItemDataPacket, this.conqueredStructures).toVanillaClientbound() : packet;
+		return packet instanceof ClientboundMapItemDataPacket mapItemDataPacket ? net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.createClientboundPacket(new MagicMapPacket(mapItemDataPacket, this.conqueredStructures)) : packet;
 	}
 
 	public void addTFDecoration(Holder<MapDecorationType> decorationType, @Nullable LevelAccessor level, String id, double x, double z, double yRot, boolean conquered) {

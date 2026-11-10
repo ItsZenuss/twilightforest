@@ -22,7 +22,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;

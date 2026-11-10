@@ -13,7 +13,7 @@ import net.minecraft.server.permissions.PermissionLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.neoforged.neoforge.common.TranslatableEnum;
+import twilightforest.port.neoforged.neoforge.common.TranslatableEnum;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.TwilightForestMod;
 import twilightforest.util.PlayerHelper;

@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.common.ItemAbilities;
+import net.minecraft.tags.ItemTags;
 import twilightforest.init.TFBlocks;
 import twilightforest.loot.TFLootTables;
 
@@ -25,7 +25,7 @@ public class LiverootBlock extends Block {
 
 	@Override
 	protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		if (stack.getItem().canPerformAction(stack, ItemAbilities.AXE_STRIP)) {
+		if (stack.is(ItemTags.AXES)) {
 			level.setBlockAndUpdate(pos, TFBlocks.ROOT_BLOCK.get().defaultBlockState());
 			if (level instanceof ServerLevel serverLevel) {
 				dropFromBlockInteractLootTable(

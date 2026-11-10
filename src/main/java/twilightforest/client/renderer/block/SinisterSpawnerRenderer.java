@@ -72,7 +72,6 @@ public class SinisterSpawnerRenderer implements BlockEntityRenderer<SinisterSpaw
 		stack.popPose();
 	}
 
-	@Override
 	public AABB getRenderBoundingBox(SinisterSpawnerBlockEntity entity) {
 		BlockPos pos = entity.getBlockPos();
 		return new AABB(pos.getX() - 1.0D, pos.getY() - 1.0D, pos.getZ() - 1.0D, pos.getX() + 2.0D, pos.getY() + 2.0D, pos.getZ() + 2.0D);

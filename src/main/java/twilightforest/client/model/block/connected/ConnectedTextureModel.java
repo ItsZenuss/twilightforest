@@ -11,7 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -141,7 +141,7 @@ public class ConnectedTextureModel implements DynamicBlockStateModel {
 	private boolean connectsTo(BlockAndTintGetter getter, BlockPos pos, Direction face, BlockState neighborState) {
 		if (!this.validConnectors.test(neighborState)) return false;
 		if (this.unculledFaces.contains(face)) return true;
-		return Block.shouldRenderFace(getter, pos.relative(face), neighborState, getter.getBlockState(pos.relative(face)), face);
+		return Block.shouldRenderFace(neighborState, getter.getBlockState(pos.relative(face)), face);
 	}
 
 	private record GeometryKey(ConnectedTextureModel model, ConnectedTextureData data) {
