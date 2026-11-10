@@ -30,3 +30,15 @@ gource.sh
 profile.jfr
 .claude
 CLAUDE.md
+
+# fabric port
+.fabric
+run-gametest
+/config
+compile_errors*.txt
+# .port holds one-off porting scripts and logs; keep only the reusable tools
+.port/*
+!.port/mixins_json.py
+!.port/convert_asset_json.py
+!.port/convert_data_json.py
+!.port/errs.py

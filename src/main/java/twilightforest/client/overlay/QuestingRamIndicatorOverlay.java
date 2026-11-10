@@ -8,7 +8,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
-import net.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.api.distmarker.Dist;
 import tamaized.beanification.Autowired;
 import twilightforest.TwilightForestMod;
 import twilightforest.config.TFConfig;

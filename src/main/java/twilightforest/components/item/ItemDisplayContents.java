@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import twilightforest.port.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.init.custom.ItemDisplays;
 import twilightforest.item.travellers_gear.modifiers.display.ItemDisplayType;
@@ -46,7 +46,8 @@ public class ItemDisplayContents implements TooltipComponent {
 	}
 
 	private ItemDisplayContents(List<ItemStack> items, int chosenMapSlot) {
-		this.items = NonNullList.copyOf(items);
+		this.items = NonNullList.create();
+		this.items.addAll(items);
 		this.chosenMapSlot = chosenMapSlot;
 	}
 
@@ -171,7 +172,7 @@ public class ItemDisplayContents implements TooltipComponent {
 
 		public boolean trySwap(SlotAccess source, Player player, BiConsumer<ItemStack, Player> remainder) {
 			ItemStack slottedStack = source.get();
-			if (slottedStack.isEmpty() || !slottedStack.canFitInsideContainerItems()) {
+			if (slottedStack.isEmpty() || !slottedStack.getItem().canFitInsideContainerItems()) {
 				return false;
 			}
 

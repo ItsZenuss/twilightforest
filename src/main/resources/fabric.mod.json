@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "id": "twilightforest",
+  "version": "${version}",
+  "name": "The Twilight Forest",
+  "description": "An enchanted forest dimension.",
+  "authors": [
+    "Benimatic",
+    "AtomicBlom",
+    "Drullkus",
+    "Killer_Demon",
+    "quadraxis",
+    "Tamaized",
+    "williewillus",
+    "Andromander",
+    "GizmoTheMoonPig",
+    "jodlodi",
+    "SleepyHorse"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/the-twilight-forest",
+    "sources": "https://github.com/TeamTwilight/twilightforest",
+    "issues": "https://github.com/TeamTwilight/twilightforest/issues"
+  },
+  "license": "LGPL-2.1-only",
+  "icon": "twilightforest_logo.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "twilightforest.TwilightForestMod"
+    ],
+    "client": [
+      "twilightforest.TwilightForestClient"
+    ],
+    "jei_mod_plugin": [
+      "twilightforest.compat.jei.JEICompat"
+    ],
+    "jade": [
+      "twilightforest.compat.jade.JadeCompat"
+    ]
+  },
+  "mixins": [
+    "twilightforest.mixins.json"
+  ],
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/world/entity/Entity": [
+        "twilightforest/port/neoforged/neoforge/attachment/IAttachmentHolder",
+        "twilightforest/port/neoforged/neoforge/entity/IPartEntityHolder",
+        "twilightforest/port/neoforged/neoforge/common/extensions/IEntityExtension"
+      ],
+      "net/minecraft/core/Holder": [
+        "twilightforest/port/neoforged/neoforge/registries/datamaps/IHolderDataMapExtension"
+      ],
+      "net/minecraft/client/renderer/entity/state/EntityRenderState": [
+        "twilightforest/port/neoforged/neoforge/client/extensions/IEntityRenderStateExtension"
+      ],
+      "net/minecraft/world/level/block/Block": [
+        "twilightforest/port/neoforged/neoforge/common/extensions/IBlockExtension"
+      ],
+      "net/minecraft/world/level/block/state/BlockState": [
+        "twilightforest/port/neoforged/neoforge/common/extensions/IBlockStateExtension"
+      ],
+      "net/minecraft/world/level/Level": [
+        "twilightforest/port/neoforged/neoforge/common/extensions/ILevelExtension"
+      ],
+      "net/minecraft/client/gui/GuiGraphicsExtractor": [
+        "twilightforest/port/neoforged/neoforge/client/extensions/IGuiGraphicsExtractorExtension"
+      ],
+      "net/minecraft/client/renderer/state/level/LevelRenderState": [
+        "twilightforest/port/neoforged/neoforge/client/extensions/IEntityRenderStateExtension"
+      ],
+      "net/minecraft/client/resources/model/ModelManager": [
+        "twilightforest/port/neoforged/neoforge/client/extensions/IModelManagerExtension"
+      ],
+      "net/minecraft/client/renderer/SubmitNodeCollector": [
+        "twilightforest/port/neoforged/neoforge/client/extensions/ISubmitNodeCollectorExtension"
+      ],
+      "net/minecraft/world/item/crafting/RecipeManager": [
+        "twilightforest/port/neoforged/neoforge/common/extensions/IRecipeManagerExtension"
+      ],
+      "net/minecraft/world/item/component/ItemContainerContents": [
+        "twilightforest/port/neoforged/neoforge/common/extensions/IItemContainerContentsExtension"
+      ],
+      "net/minecraft/client/Minecraft": [
+        "twilightforest/port/neoforged/neoforge/client/extensions/IMinecraftExtension"
+      ],
+      "net/minecraft/world/item/TooltipFlag": [
+        "twilightforest/port/neoforged/neoforge/client/extensions/ITooltipFlagExtension"
+      ],
+      "net/minecraft/world/item/Item": [
+        "twilightforest/port/neoforged/neoforge/common/extensions/IItemExtension"
+      ],
+      "net/minecraft/client/renderer/state/MapRenderState": [
+        "twilightforest/port/neoforged/neoforge/client/extensions/IMapRenderStateExtension"
+      ],
+      "net/minecraft/client/renderer/state/MapRenderState$MapDecorationRenderState": [
+        "twilightforest/port/neoforged/neoforge/client/extensions/IMapRenderStateExtension"
+      ]
+    }
+  },
+  "accessWidener": "twilightforest.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "~26.1",
+    "java": ">=25",
+    "fabric-api": ">=0.145.4"
+  },
+  "suggests": {
+    "trinkets": "*",
+    "emi": "*",
+    "jei": "*",
+    "roughlyenoughitems": "*",
+    "jade": "*"
+  }
+}

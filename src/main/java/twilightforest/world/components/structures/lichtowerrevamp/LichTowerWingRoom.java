@@ -37,8 +37,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.neoforged.fml.loading.FMLLoader;
-import net.neoforged.neoforge.common.world.PieceBeardifierModifier;
+import twilightforest.port.neoforged.fml.loading.FMLEnvironment;
+import twilightforest.port.neoforged.neoforge.common.world.PieceBeardifierModifier;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.TwilightForestMod;
@@ -280,7 +280,7 @@ public final class LichTowerWingRoom extends TwilightJigsawPiece implements Piec
 			}
 
 			if (this.roofFallback >= 0) {
-				// if (!FMLLoader.isProduction()) TwilightForestMod.LOGGER.error("Failed to generate room above {}", this.templatePosition.offset(topPos));
+				// if (!FMLEnvironment.isProduction()) TwilightForestMod.LOGGER.error("Failed to generate room above {}", this.templatePosition.offset(topPos));
 				// If the room above cannot generate, then place the roof instead
 				this.putRoof(pieceAccessor, context, this.getSpareJigsaws().get(this.roofFallback));
 			}
@@ -546,7 +546,7 @@ public final class LichTowerWingRoom extends TwilightJigsawPiece implements Piec
 				BlockState blockState = this.blockFromLabel(parameters[0]).rotate(stateRotation);
 				if (!blockState.isAir()) {
 					level.setBlock(pos, blockState, Block.UPDATE_CLIENTS);
-				} else if (!FMLLoader.getCurrent().isProduction()) {
+				} else if (!FMLEnvironment.isProduction()) {
 					TwilightForestMod.LOGGER.warn("Variation label {} ({}) obtained {} in {}", parameters[0], parameters, blockState, this.templateName);
 				}
 			}

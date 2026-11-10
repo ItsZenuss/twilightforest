@@ -117,7 +117,7 @@ public class TFItemTags {
 	public static final TagKey<Item> RANDOMIUM_BLACKLIST = create("randomium", "blacklist");
 
 	private static TagKey<Item> create(String tagName) {
-		return ItemTags.create(TwilightForestMod.prefix(tagName));
+		return net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, TwilightForestMod.prefix(tagName));
 	}
 
 	public static TagKey<Item> makeCommonTag(String tagName) {
@@ -125,6 +125,6 @@ public class TFItemTags {
 	}
 
 	private static TagKey<Item> create(String modid, String tagName) {
-		return ItemTags.create(Identifier.fromNamespaceAndPath(modid, tagName));
+		return net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, Identifier.fromNamespaceAndPath(modid, tagName));
 	}
 }

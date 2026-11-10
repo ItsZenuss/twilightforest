@@ -9,7 +9,7 @@ import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.TriState;
+import twilightforest.port.neoforged.neoforge.common.util.TriState;
 import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,8 +22,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.util.FakePlayer;
-import net.neoforged.neoforge.common.util.FakePlayerFactory;
+import twilightforest.port.neoforged.neoforge.common.util.FakePlayer;
+import twilightforest.port.neoforged.neoforge.common.util.FakePlayerFactory;
 import org.jspecify.annotations.Nullable;
 import twilightforest.init.TFBlocks;
 import twilightforest.init.TFItems;
@@ -53,11 +53,10 @@ public class UberousSoilBlock extends Block implements BonemealableBlock {
 		return state.isSolid() && !(state.getBlock() instanceof BonemealableBlock && !state.is(this)) ? Blocks.DIRT.defaultBlockState() : super.getStateForPlacement(ctx);
 	}
 
-	@Override
 	public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
 		if (facing.getAxis() != Direction.Axis.Y) return TriState.FALSE;
 		if (plant.is(BlockTags.CROPS)) return TriState.TRUE;
-		return super.canSustainPlant(state, level, soilPosition, facing, plant);
+		return TriState.DEFAULT;
 	}
 
 	@Override
@@ -124,11 +123,10 @@ public class UberousSoilBlock extends Block implements BonemealableBlock {
 
 	private void scheduleBonemeal(ServerLevel level, BlockPos target) {
 		MinecraftServer server = level.getServer();
-		FakePlayer fakePlayer = FakePlayerFactory.getMinecraft(level);
 		server.schedule(new TickTask(server.getTickCount(), () -> {
 			//We need to use a tick task so that plants that grow into tall variants don't just break upon growth
 			for (int i = 0; i < 15; i++)
-				BoneMealItem.applyBonemeal(new ItemStack(Items.BONE_MEAL), level, target, fakePlayer);
+				BoneMealItem.growCrop(new ItemStack(Items.BONE_MEAL), level, target);
 		}));
 		level.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, target, 15); // Bonemeal particles
 	}

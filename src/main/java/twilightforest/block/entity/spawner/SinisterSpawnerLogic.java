@@ -23,7 +23,7 @@ import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.event.EventHooks;
+import twilightforest.port.neoforged.neoforge.event.EventHooks;
 import org.jspecify.annotations.Nullable;
 import twilightforest.TwilightForestMod;
 import twilightforest.init.TFBlocks;
@@ -31,7 +31,7 @@ import twilightforest.util.BoundingBoxUtils;
 
 import java.util.*;
 
-public abstract class SinisterSpawnerLogic extends BaseSpawner {
+public abstract class SinisterSpawnerLogic extends BaseSpawner implements twilightforest.port.neoforged.neoforge.common.extensions.IOwnedSpawner {
 	private static final Codec<List<ParticleOptions>> PARTICLES_CODEC = ParticleTypes.CODEC.listOf();
 
 	private BlockPos.@Nullable MutableBlockPos checkPos = null;

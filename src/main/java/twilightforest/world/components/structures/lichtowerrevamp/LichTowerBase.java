@@ -16,7 +16,7 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
-import net.neoforged.neoforge.common.world.PieceBeardifierModifier;
+import twilightforest.port.neoforged.neoforge.common.world.PieceBeardifierModifier;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.TwilightForestMod;
@@ -146,13 +146,13 @@ public final class LichTowerBase extends TwilightJigsawPiece implements PieceBea
 
 		@Nullable
 		@Override
-		public StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos origin, BlockPos centerBottom, StructureTemplate.StructureBlockInfo originalBlockInfo, StructureTemplate.StructureBlockInfo modifiedBlockInfo, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
+		public StructureTemplate.StructureBlockInfo processBlock(LevelReader level, BlockPos origin, BlockPos centerBottom, StructureTemplate.StructureBlockInfo originalBlockInfo, StructureTemplate.StructureBlockInfo modifiedBlockInfo, StructurePlaceSettings settings) {
 			if (modifiedBlockInfo.state().is(Blocks.POLISHED_ANDESITE_STAIRS) && level.getBlockState(modifiedBlockInfo.pos()).is(BlockTags.STONE_BRICKS)) {
 				// Don't replace trim blocks placed by tower wings
 				return null;
 			}
 
-			return super.process(level, origin, centerBottom, originalBlockInfo, modifiedBlockInfo, settings, template);
+			return super.processBlock(level, origin, centerBottom, originalBlockInfo, modifiedBlockInfo, settings);
 		}
 
 		@Override

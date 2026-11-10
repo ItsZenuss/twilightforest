@@ -16,9 +16,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.GameType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import twilightforest.port.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import twilightforest.port.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.TwilightForestMod;
 import tamaized.beanification.Autowired;
@@ -43,6 +43,8 @@ public class OverlayHandler {
 	private static final Identifier QUESTING_RAM_X_SPRITE = TwilightForestMod.prefix("questing_ram_x");
 	private static final Identifier FORTIFICATION_SHIELD_SPRITE = TwilightForestMod.prefix("fortification_shield");
 	public static final Map<Long, OreMeterInfoCache> ORE_METER_STAT_CACHE = new HashMap<>();
+	public static int leftHeight = 39;
+	public static int rightHeight = 39;
 
 	@Autowired(dist = Dist.CLIENT)
 	private static QuestingRamCurrentContext questingRamCurrentContext;
@@ -62,9 +64,9 @@ public class OverlayHandler {
 			Gui gui = minecraft.gui;
 			if (!minecraft.options.hideGui && minecraft.gameMode.canHurtPlayer() && player != null && HostileMountEvents.isRidingUnfriendly(player)) {
 				int xPos = graphics.guiWidth() / 2 + 91;
-				int yPos = graphics.guiHeight() - gui.rightHeight;
+				int yPos = graphics.guiHeight() - rightHeight;
 				gui.extractFood(graphics, player, yPos, xPos);
-				gui.rightHeight += 10;
+				rightHeight += 10;
 			}
 		});
 		event.registerAboveAll(TwilightForestMod.prefix("ore_meter_stats"), (graphics, partialTicks) -> {
@@ -118,9 +120,9 @@ public class OverlayHandler {
 
 	private static void renderShieldCount(GuiGraphicsExtractor graphics, Gui gui, int screenWidth, int screenHeight, int shieldCount) {
 		for (int i = 0; i < Math.min(shieldCount, 10); i++) {
-			graphics.blitSprite(RenderPipelines.GUI_TEXTURED, FORTIFICATION_SHIELD_SPRITE, screenWidth / 2 - 91 + (i * 8), screenHeight - gui.leftHeight, 9, 9);
+			graphics.blitSprite(RenderPipelines.GUI_TEXTURED, FORTIFICATION_SHIELD_SPRITE, screenWidth / 2 - 91 + (i * 8), screenHeight - leftHeight, 9, 9);
 		}
-		gui.leftHeight += 10;
+		leftHeight += 10;
 	}
 
 	private static void renderOreMeterStats(GuiGraphicsExtractor graphics, Player player) {

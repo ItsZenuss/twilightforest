@@ -69,7 +69,7 @@ public interface StructureHints {
 				list,
 				true
 			))
-			.set(TFDataComponents.TRANSLATABLE_BOOK.value(), Unit.INSTANCE)
+			.set(TFDataComponents.TRANSLATABLE_BOOK, Unit.INSTANCE)
 			.build());
 	}
 

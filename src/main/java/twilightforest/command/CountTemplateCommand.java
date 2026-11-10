@@ -16,7 +16,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.structure.*;
-import net.neoforged.fml.util.ObfuscationReflectionHelper;
+import twilightforest.port.neoforged.fml.util.ObfuscationReflectionHelper;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

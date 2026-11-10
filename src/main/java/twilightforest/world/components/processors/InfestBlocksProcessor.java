@@ -38,7 +38,7 @@ public final class InfestBlocksProcessor extends StructureProcessor {
 	}
 
 	@Override
-	public StructureTemplate.StructureBlockInfo process(LevelReader worldReaderIn, BlockPos pos, BlockPos piecepos, StructureTemplate.StructureBlockInfo originalBlock, StructureTemplate.StructureBlockInfo modifiedBlockInfo, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
+	public StructureTemplate.StructureBlockInfo processBlock(LevelReader worldReaderIn, BlockPos pos, BlockPos piecepos, StructureTemplate.StructureBlockInfo originalBlock, StructureTemplate.StructureBlockInfo modifiedBlockInfo, StructurePlaceSettings settings) {
 		RandomSource random = settings.getRandom(modifiedBlockInfo.pos().below(-10));
 
 		// We use nextBoolean in other processors so this lets us re-seed deterministically

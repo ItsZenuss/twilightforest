@@ -80,7 +80,6 @@ public class ThornsBlock extends ConnectableRotatedPillarBlock implements Simple
 	}
 
 	@Nullable
-	@Override
 	public PathType getBlockPathType(BlockState state, BlockGetter getter, BlockPos pos, @Nullable Mob entity) {
 		return PathType.DAMAGING;
 	}
@@ -101,7 +100,6 @@ public class ThornsBlock extends ConnectableRotatedPillarBlock implements Simple
 		super.stepOn(level, pos, state, entity);
 	}
 
-	@Override
 	public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, ItemStack toolStack, boolean willHarvest, FluidState fluid) {
 		if (!player.isCreative()) {
 			if (!level.isClientSide()) {
@@ -110,7 +108,7 @@ public class ThornsBlock extends ConnectableRotatedPillarBlock implements Simple
 			}
 			return false;
 		} else {
-			return super.onDestroyedByPlayer(state, level, pos, player, toolStack, willHarvest, fluid);
+			return level.destroyBlock(pos, willHarvest, player);
 		}
 	}
 

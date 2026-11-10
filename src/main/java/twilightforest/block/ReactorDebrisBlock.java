@@ -70,7 +70,6 @@ public class ReactorDebrisBlock extends BaseEntityBlock {
 		return new ReactorDebrisBlockEntity(blockPos, blockState);
 	}
 
-	@Override
 	public boolean addLandingEffects(BlockState state1, ServerLevel level, BlockPos pos, BlockState state2, LivingEntity entity, int numberOfParticles) {
 		return true;  // Actually disables landing particle effects after fall.
 	}

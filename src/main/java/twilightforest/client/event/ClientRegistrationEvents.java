@@ -43,22 +43,23 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.extensions.common.IClientBlockExtensions;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.neoforged.neoforge.client.gui.map.RegisterMapDecorationRenderersEvent;
-import net.neoforged.neoforge.client.model.standalone.SimpleUnbakedStandaloneModel;
-import net.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
-import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
-import net.neoforged.neoforge.common.tooltip.TooltipAppender;
-import net.neoforged.neoforge.event.RegisterTooltipAppendersEvent;
+import twilightforest.port.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.bus.api.IEventBus;
+import twilightforest.port.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import twilightforest.port.neoforged.neoforge.client.event.*;
+import twilightforest.port.neoforged.neoforge.client.extensions.common.IClientBlockExtensions;
+import twilightforest.port.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import twilightforest.port.neoforged.neoforge.client.gui.map.RegisterMapDecorationRenderersEvent;
+import twilightforest.port.neoforged.neoforge.client.model.standalone.SimpleUnbakedStandaloneModel;
+import twilightforest.port.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
+import twilightforest.port.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
+import twilightforest.port.neoforged.neoforge.common.tooltip.TooltipAppender;
+import twilightforest.port.neoforged.neoforge.event.RegisterTooltipAppendersEvent;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
 import twilightforest.TwilightForestMod;
@@ -114,36 +115,36 @@ public class ClientRegistrationEvents {
 	@PostConstruct
 	private void setup(IEventBus bus) {
 		bus.addListener(EntityRenderersEvent.AddLayers.class, this::attachRenderLayers);
-		bus.addListener(this::bakeCustomModels);
-		bus.addListener(this::clientSetup);
-		bus.addListener(this::registerStandalone);
-		bus.addListener(this::registerClientReloadListeners);
-		bus.addListener(this::registerAtlases);
-		bus.addListener(this::registerEntityRenderers);
-		bus.addListener(this::registerLayerDefinitions);
-		bus.addListener(this::registerBlockStateModels);
-		bus.addListener(this::registerScreens);
-		bus.addListener(this::registerSpecialModelRenders);
-		bus.addListener(this::registerClientExtensions);
-		bus.addListener(this::registerMapDecorators);
-		bus.addListener(this::registerParticleFactories);
-		bus.addListener(this::registerConditionalProperties);
-		bus.addListener(this::registerRangeProperties);
-		bus.addListener(this::registerSelectProperties);
-		bus.addListener(this::registerItemModels);
-		bus.addListener(this::registerCustomEnvironmentRenderers);
-		bus.addListener(this::registerCustomRenderData);
-		bus.addListener(this::registerPictureInPictureRenderers);
-		bus.addListener(this::registerComponentTooltips);
+		bus.addListener(ModelEvent.ModifyBakingResult.class, this::bakeCustomModels);
+		bus.addListener(FMLClientSetupEvent.class, this::clientSetup);
+		bus.addListener(ModelEvent.RegisterStandalone.class, this::registerStandalone);
+		bus.addListener(AddClientReloadListenersEvent.class, this::registerClientReloadListeners);
+		bus.addListener(RegisterTextureAtlasesEvent.class, this::registerAtlases);
+		bus.addListener(EntityRenderersEvent.RegisterRenderers.class, this::registerEntityRenderers);
+		bus.addListener(EntityRenderersEvent.RegisterLayerDefinitions.class, this::registerLayerDefinitions);
+		bus.addListener(RegisterBlockStateModels.class, this::registerBlockStateModels);
+		bus.addListener(RegisterMenuScreensEvent.class, this::registerScreens);
+		bus.addListener(RegisterSpecialModelRendererEvent.class, this::registerSpecialModelRenders);
+		bus.addListener(RegisterClientExtensionsEvent.class, this::registerClientExtensions);
+		bus.addListener(RegisterMapDecorationRenderersEvent.class, this::registerMapDecorators);
+		bus.addListener(RegisterParticleProvidersEvent.class, this::registerParticleFactories);
+		bus.addListener(RegisterConditionalItemModelPropertyEvent.class, this::registerConditionalProperties);
+		bus.addListener(RegisterRangeSelectItemModelPropertyEvent.class, this::registerRangeProperties);
+		bus.addListener(RegisterSelectItemModelPropertyEvent.class, this::registerSelectProperties);
+		bus.addListener(RegisterItemModelsEvent.class, this::registerItemModels);
+		bus.addListener(RegisterCustomEnvironmentEffectRendererEvent.class, this::registerCustomEnvironmentRenderers);
+		bus.addListener(RegisterRenderStateModifiersEvent.class, this::registerCustomRenderData);
+		bus.addListener(RegisterPictureInPictureRenderersEvent.class, this::registerPictureInPictureRenderers);
+		bus.addListener(RegisterTooltipAppendersEvent.class, this::registerComponentTooltips);
 
 		bus.addListener(RegisterKeyMappingsEvent.class, event -> TFKeyBinds.KEY_MAPPINGS.forEach(event::register));
 
-		bus.addListener(ColorHandler::registerBlockColors);
-		bus.addListener(ColorHandler::registerItemColors);
+		bus.addListener(twilightforest.port.neoforged.neoforge.client.event.RegisterColorHandlersEvent.BlockTintSources.class, ColorHandler::registerBlockColors);
+		bus.addListener(twilightforest.port.neoforged.neoforge.client.event.RegisterColorHandlersEvent.ItemTintSources.class, ColorHandler::registerItemColors);
 
 		bus.addListener(RegisterRenderPipelinesEvent.class, event -> event.registerPipeline(TFRenderPipelines.AURORA));
 
-		bus.addListener(OverlayHandler::registerOverlays);
+		bus.addListener(twilightforest.port.neoforged.neoforge.client.event.RegisterGuiLayersEvent.class, OverlayHandler::registerOverlays);
 
 		bus.addListener(RegisterClientTooltipComponentFactoriesEvent.class, event -> {
 			event.register(PotionFlaskItem.Tooltip.class, PotionFlaskTooltipComponent::new);
@@ -215,15 +216,18 @@ public class ClientRegistrationEvents {
 
 	private void clientSetup(FMLClientSetupEvent evt) {
 		evt.enqueueWork(() -> {
-			Sheets.addWoodType(TFWoodTypes.TWILIGHT_OAK_WOOD_TYPE);
-			Sheets.addWoodType(TFWoodTypes.CANOPY_WOOD_TYPE);
-			Sheets.addWoodType(TFWoodTypes.MANGROVE_WOOD_TYPE);
-			Sheets.addWoodType(TFWoodTypes.DARK_WOOD_TYPE);
-			Sheets.addWoodType(TFWoodTypes.TIME_WOOD_TYPE);
-			Sheets.addWoodType(TFWoodTypes.TRANSFORMATION_WOOD_TYPE);
-			Sheets.addWoodType(TFWoodTypes.MINING_WOOD_TYPE);
-			Sheets.addWoodType(TFWoodTypes.SORTING_WOOD_TYPE);
+			addWoodType(TFWoodTypes.TWILIGHT_OAK_WOOD_TYPE);
+			addWoodType(TFWoodTypes.CANOPY_WOOD_TYPE);
+			addWoodType(TFWoodTypes.MANGROVE_WOOD_TYPE);
+			addWoodType(TFWoodTypes.DARK_WOOD_TYPE);
+			addWoodType(TFWoodTypes.TIME_WOOD_TYPE);
+			addWoodType(TFWoodTypes.TRANSFORMATION_WOOD_TYPE);
+			addWoodType(TFWoodTypes.MINING_WOOD_TYPE);
+			addWoodType(TFWoodTypes.SORTING_WOOD_TYPE);
 		});
+	}
+
+	private static void addWoodType(WoodType woodType) {
 	}
 
 	private void registerAtlases(RegisterTextureAtlasesEvent event) {
@@ -726,6 +730,6 @@ public class ClientRegistrationEvents {
 	}
 
 	private void registerComponentTooltips(RegisterTooltipAppendersEvent event) {
-		event.registerComponentAppenderAfter(TFDataComponents.SKULL_CANDLES, DataComponents.LORE, TooltipAppender.createComponentAppender(TFDataComponents.SKULL_CANDLES.get()));
+		event.registerComponentAppenderAfter(TFDataComponents.SKULL_CANDLES, DataComponents.LORE, TooltipAppender.createComponentAppender(TFDataComponents.SKULL_CANDLES));
 	}
 }

@@ -121,6 +121,6 @@ public class TFMazeMapData extends MapItemSavedData {
 	@Override
 	public Packet<?> getUpdatePacket(MapId mapId, Player player) {
 		Packet<?> packet = super.getUpdatePacket(mapId, player);
-		return packet instanceof ClientboundMapItemDataPacket mapItemDataPacket ? new MazeMapPacket(mapItemDataPacket, this.ore, this.yCenter).toVanillaClientbound() : packet;
+		return packet instanceof ClientboundMapItemDataPacket mapItemDataPacket ? net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.createClientboundPacket(new MazeMapPacket(mapItemDataPacket, this.ore, this.yCenter)) : packet;
 	}
 }

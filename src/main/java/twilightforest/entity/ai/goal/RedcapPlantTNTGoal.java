@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.neoforged.neoforge.event.EventHooks;
+import twilightforest.port.neoforged.neoforge.event.EventHooks;
 import twilightforest.entity.monster.Redcap;
 
 public class RedcapPlantTNTGoal extends RedcapBaseGoal {

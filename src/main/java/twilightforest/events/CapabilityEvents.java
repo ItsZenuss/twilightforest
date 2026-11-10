@@ -10,11 +10,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.LevelData;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.tick.EntityTickEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.player.PlayerEvent;
+import twilightforest.port.neoforged.neoforge.event.tick.EntityTickEvent;
+import twilightforest.port.neoforged.neoforge.event.tick.PlayerTickEvent;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
 import twilightforest.components.entity.FortificationShieldAttachment;
@@ -29,11 +29,11 @@ public class CapabilityEvents {
 
 	@PostConstruct
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(this::updateShields);
-		NeoForge.EVENT_BUS.addListener(this::updatePlayerCaps);
-		NeoForge.EVENT_BUS.addListener(this::absorbShieldHits);
-		NeoForge.EVENT_BUS.addListener(this::spawnInTFIfNecessary);
-		NeoForge.EVENT_BUS.addListener(this::playerLogsIn);
+		NeoForge.EVENT_BUS.addListener(EntityTickEvent.Post.class, this::updateShields);
+		NeoForge.EVENT_BUS.addListener(PlayerTickEvent.Post.class, this::updatePlayerCaps);
+		NeoForge.EVENT_BUS.addListener(LivingIncomingDamageEvent.class, this::absorbShieldHits);
+		NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerRespawnEvent.class, this::spawnInTFIfNecessary);
+		NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedInEvent.class, this::playerLogsIn);
 	}
 
 	private void updateShields(EntityTickEvent.Post event) {
@@ -109,16 +109,18 @@ public class CapabilityEvents {
 		player.setData(TFDataAttachments.BANISHED_TO_TWILIGHT_FOREST, Unit.INSTANCE);
 	}
 
+	public static final String PERSISTED_NBT_TAG = "PlayerPersisted";
+
 	private static void dataFixLegacyBanish(ServerPlayer player) {
 		CompoundTag tagCompound = player.getPersistentData();
-		if (!tagCompound.contains(Player.PERSISTED_NBT_TAG))
+		if (!tagCompound.contains(PERSISTED_NBT_TAG))
 			return;
-		CompoundTag playerData = tagCompound.getCompoundOrEmpty(Player.PERSISTED_NBT_TAG);
+		CompoundTag playerData = tagCompound.getCompoundOrEmpty(PERSISTED_NBT_TAG);
 		if (!playerData.contains("twilightforest_banished"))
 			return;
 
 		playerData.remove("twilightforest_banished");
-		tagCompound.put(Player.PERSISTED_NBT_TAG, playerData);
+		tagCompound.put(PERSISTED_NBT_TAG, playerData);
 
 		if (player.hasData(TFDataAttachments.BANISHED_TO_TWILIGHT_FOREST))
 			return;

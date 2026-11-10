@@ -33,7 +33,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.util.ConcatenatedListView;
+import twilightforest.port.neoforged.neoforge.common.util.ConcatenatedListView;
 import org.jspecify.annotations.Nullable;
 import twilightforest.block.entity.spawner.SinisterSpawnerBlockEntity;
 import twilightforest.block.entity.spawner.SinisterSpawnerLogic;
@@ -66,13 +66,22 @@ public class SinisterSpawnerBlock extends BaseEntityBlock implements TooltipBloc
 
 	@Nullable
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-		return createTickerHelper(blockEntityType, TFBlockEntities.SINISTER_SPAWNER.value(), level.isClientSide() ? SinisterSpawnerBlockEntity::clientTick : SinisterSpawnerBlockEntity::serverTick);
+		return createTickerHelper(blockEntityType, (BlockEntityType<SinisterSpawnerBlockEntity>) (BlockEntityType<?>) TFBlockEntities.SINISTER_SPAWNER.value(), level.isClientSide() ? SinisterSpawnerBlockEntity::clientTick : SinisterSpawnerBlockEntity::serverTick);
 	}
 
-	@Override
 	public int getExpDrop(BlockState state, LevelAccessor level, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity breaker, ItemStack tool) {
 		return 15 + level.getRandom().nextInt(15) + level.getRandom().nextInt(15);
+	}
+
+	// Fabric port: NeoForge dropped getExpDrop experience automatically; vanilla blocks do it here, like SpawnerBlock.
+	@Override
+	protected void spawnAfterBreak(BlockState state, net.minecraft.server.level.ServerLevel level, BlockPos pos, ItemStack tool, boolean dropExperience) {
+		super.spawnAfterBreak(state, level, pos, tool, dropExperience);
+		if (dropExperience) {
+			this.popExperience(level, pos, this.getExpDrop(state, level, pos, null, null, tool));
+		}
 	}
 
 	@Override

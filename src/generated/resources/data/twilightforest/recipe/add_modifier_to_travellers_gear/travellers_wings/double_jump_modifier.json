@@ -5,34 +5,34 @@
   "pattern": {
     "key": {
       "L": {
-        "neoforge:ingredient_type": "neoforge:compound",
-        "children": [
+        "fabric:type": "fabric:any",
+        "ingredients": [
           {
-            "neoforge:ingredient_type": "neoforge:components",
+            "fabric:type": "fabric:components",
+            "base": "minecraft:potion",
             "components": {
               "minecraft:potion_contents": {
                 "potion": "minecraft:leaping"
               }
-            },
-            "items": "minecraft:potion"
+            }
           },
           {
-            "neoforge:ingredient_type": "neoforge:components",
+            "fabric:type": "fabric:components",
+            "base": "minecraft:potion",
             "components": {
               "minecraft:potion_contents": {
                 "potion": "minecraft:long_leaping"
               }
-            },
-            "items": "minecraft:potion"
+            }
           },
           {
-            "neoforge:ingredient_type": "neoforge:components",
+            "fabric:type": "fabric:components",
+            "base": "minecraft:potion",
             "components": {
               "minecraft:potion_contents": {
                 "potion": "minecraft:strong_leaping"
               }
-            },
-            "items": "minecraft:potion"
+            }
           }
         ]
       },

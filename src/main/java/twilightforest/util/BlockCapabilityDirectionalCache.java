@@ -3,8 +3,8 @@ package twilightforest.util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.neoforged.neoforge.capabilities.BlockCapability;
-import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+import twilightforest.port.neoforged.neoforge.capabilities.BlockCapability;
+import twilightforest.port.neoforged.neoforge.capabilities.BlockCapabilityCache;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

@@ -1,9 +1,9 @@
 package twilightforest.compat;
 
 import net.minecraft.world.item.crafting.RecipeMap;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
-import net.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.neoforge.client.event.RecipesReceivedEvent;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
 import org.jspecify.annotations.Nullable;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
@@ -16,7 +16,7 @@ public class RecipeViewerRecipes {
 
 	@PostConstruct
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(this::cacheRecipes);
+		NeoForge.EVENT_BUS.addListener(RecipesReceivedEvent.class, this::cacheRecipes);
 	}
 
 	private void cacheRecipes(RecipesReceivedEvent event) {

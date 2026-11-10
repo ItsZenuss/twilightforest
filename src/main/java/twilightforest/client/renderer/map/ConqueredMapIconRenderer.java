@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.neoforged.neoforge.client.gui.map.IMapDecorationRenderer;
-import net.neoforged.neoforge.client.renderstate.MapDecorationRenderStateModifier;
+import twilightforest.port.neoforged.neoforge.client.gui.map.IMapDecorationRenderer;
+import twilightforest.port.neoforged.neoforge.client.renderstate.MapDecorationRenderStateModifier;
 import twilightforest.TwilightForestMod;
 import twilightforest.item.MagicMapItem;
 import twilightforest.item.mapdata.TFMagicMapData;
@@ -23,7 +23,7 @@ public class ConqueredMapIconRenderer implements IMapDecorationRenderer, MapDeco
 	@Override
 	public void accept(MapItemSavedData mapData, MapRenderState mapRenderState, MapRenderState.MapDecorationRenderState decoration) {
 		if (mapData instanceof TFMagicMapData map)
-			decoration.setRenderData(CONQUERED_KEY, map.conqueredStructures.contains(MagicMapItem.makeName(decoration.type, decoration.x, decoration.y)));
+			decoration.setRenderData(CONQUERED_KEY, map.conqueredStructures.contains(MagicMapItem.makeName(decoration.getType(), decoration.x, decoration.y)));
 	}
 
 	@Override

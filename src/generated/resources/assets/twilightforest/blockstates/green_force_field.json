@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "type": "twilightforest:force_field",
+      "fabric:type": "twilightforest:force_field",
       "ambient_occlusion": false,
       "elements": [
         {

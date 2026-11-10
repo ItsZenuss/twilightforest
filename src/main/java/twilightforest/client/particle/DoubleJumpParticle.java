@@ -7,8 +7,8 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import twilightforest.port.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.api.distmarker.OnlyIn;
 
 public class DoubleJumpParticle extends ExplodeParticle {
 

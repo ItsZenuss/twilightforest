@@ -28,12 +28,13 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.component.UseEffects;
 import net.minecraft.world.phys.Vec2;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import twilightforest.port.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.neoforge.attachment.AttachmentType;
+import twilightforest.port.neoforged.neoforge.client.event.*;
+import twilightforest.port.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.registries.DeferredHolder;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
 import twilightforest.TwilightForestMod;
@@ -55,20 +56,20 @@ public class TravellersClientEvents {
 
 	@PostConstruct
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(this::handleDoubleJump);
-		NeoForge.EVENT_BUS.addListener(this::handleAgileRanger);
-		NeoForge.EVENT_BUS.addListener(this::handleStraightAhead);
-		NeoForge.EVENT_BUS.addListener(this::excludeStraightAheadFromFov);
-		NeoForge.EVENT_BUS.addListener(this::speedUpControlledWhileSneaking);
-		NeoForge.EVENT_BUS.addListener(this::handleSidestep);
-		NeoForge.EVENT_BUS.addListener(this::handleStealth);
-		NeoForge.EVENT_BUS.addListener(this::updateZoomState);
-		NeoForge.EVENT_BUS.addListener(this::updateGradualGlideState);
-		NeoForge.EVENT_BUS.addListener(this::cycleItemDisplayMap);
-		NeoForge.EVENT_BUS.addListener(this::slowZoomSensitivity);
-		NeoForge.EVENT_BUS.addListener(this::swapHotbar);
-		NeoForge.EVENT_BUS.addListener(this::toggleRedThreadVision);
-		NeoForge.EVENT_BUS.addListener(this::renderGlovesInFirstPerson);
+		NeoForge.EVENT_BUS.addListener(InputEvent.Key.class, this::handleDoubleJump);
+		NeoForge.EVENT_BUS.addListener(MovementInputUpdateEvent.class, this::handleAgileRanger);
+		NeoForge.EVENT_BUS.addListener(MovementInputUpdateEvent.class, this::handleStraightAhead);
+		NeoForge.EVENT_BUS.addListener(ComputeFovModifierEvent.class, this::excludeStraightAheadFromFov);
+		NeoForge.EVENT_BUS.addListener(MovementInputUpdateEvent.class, this::speedUpControlledWhileSneaking);
+		NeoForge.EVENT_BUS.addListener(MovementInputUpdateEvent.class, this::handleSidestep);
+		NeoForge.EVENT_BUS.addListener(RenderFrameEvent.Pre.class, this::handleStealth);
+		NeoForge.EVENT_BUS.addListener(ComputeFovModifierEvent.class, this::updateZoomState);
+		NeoForge.EVENT_BUS.addListener(RenderFrameEvent.Pre.class, this::updateGradualGlideState);
+		NeoForge.EVENT_BUS.addListener(InputEvent.Key.class, this::cycleItemDisplayMap);
+		NeoForge.EVENT_BUS.addListener(CalculatePlayerTurnEvent.class, this::slowZoomSensitivity);
+		NeoForge.EVENT_BUS.addListener(InputEvent.Key.class, this::swapHotbar);
+		NeoForge.EVENT_BUS.addListener(InputEvent.Key.class, this::toggleRedThreadVision);
+		NeoForge.EVENT_BUS.addListener(RenderArmEvent.class, this::renderGlovesInFirstPerson);
 	}
 
 	private void handleAgileRanger(MovementInputUpdateEvent event) {
@@ -142,7 +143,7 @@ public class TravellersClientEvents {
 		if (lastImpulseZero && sameImpulseDirection && hasDoubleTapped && input.getMoveVector().x != 0) {
 			boolean isLeftSidestep = input.getMoveVector().x > 0;
 			if (TravellersGearLogic.tryPerformSidestep(localPlayer, isLeftSidestep)) {
-				localPlayer.connection.send(new PerformSidestepPacket(isLeftSidestep));
+				PacketDistributor.sendToServer(new PerformSidestepPacket(isLeftSidestep));
 			}
 		}
 
@@ -169,10 +170,10 @@ public class TravellersClientEvents {
 		boolean pressedKey = event.getAction() == InputConstants.PRESS;
 		if (pressedKey)
 			localPlayer.setData(TFDataAttachments.LAST_JUMP_KEY_PRESS_TIME, localPlayer.tickCount);
-		boolean avoidCreativeFly = localPlayer.mayFly() && localPlayer.tickCount - lastJumpKeyPressTime <= 6;
+		boolean avoidCreativeFly = localPlayer.getAbilities().mayfly && localPlayer.tickCount - lastJumpKeyPressTime <= 6;
 		if (pressedKey && !avoidCreativeFly && TravellersModifiersManager.isModifierActive(localPlayer, TravellersModifiersManager.DOUBLE_JUMP_MODIFIER)) {
 			if (TravellersGearLogic.performDoubleJump(localPlayer)) {
-				localPlayer.connection.send(new PerformDoubleJumpPacket());
+				PacketDistributor.sendToServer(new PerformDoubleJumpPacket());
 			}
 		}
 	}
@@ -191,7 +192,7 @@ public class TravellersClientEvents {
 
 		player.setData(TFDataAttachments.IS_USING_GOGGLES_ZOOM_MODIFIER, isUsingZoom);
 		player.playSound(isUsingZoom ? TFSounds.GOGGLES_ZOOM_IN.get() : TFSounds.GOGGLES_ZOOM_OUT.get());
-		player.connection.send(new GogglesZoomPacket(isUsingZoom, player.getUUID()));
+		PacketDistributor.sendToServer(new GogglesZoomPacket(isUsingZoom, player.getUUID()));
 	}
 
 	private void updateGradualGlideState(RenderFrameEvent.Pre event) {
@@ -205,13 +206,13 @@ public class TravellersClientEvents {
 			return;
 
 		player.setData(TFDataAttachments.IS_GRADUALLY_GLIDING, isGraduallyGliding);
-		player.connection.send(new GradualGlidePacket(isGraduallyGliding, player.getUUID()));
+		PacketDistributor.sendToServer(new GradualGlidePacket(isGraduallyGliding, player.getUUID()));
 	}
 
 	private void cycleItemDisplayMap(InputEvent.Key event) {
 		if (!(Minecraft.getInstance().player instanceof LocalPlayer localPlayer) || !TFKeyBinds.ITEM_DISPLAY_MAP_CYCLE_KEY.consumeClick())
 			return;
-		localPlayer.connection.send(CycleMapSlotPacket.INSTANCE);
+		PacketDistributor.sendToServer(CycleMapSlotPacket.INSTANCE);
 	}
 
 	private void swapHotbar(InputEvent.Key event) {
@@ -224,7 +225,7 @@ public class TravellersClientEvents {
 		ItemContainerContents containerContents = legArmor.get(DataComponents.CONTAINER);
 		if (!TravellersArmorBeltItem.hasSwapHotbar(player, legArmor) || containerContents == null)
 			return;
-		localPlayer.connection.send(SwapHotbarPacket.INSTANCE);
+		PacketDistributor.sendToServer(SwapHotbarPacket.INSTANCE);
 	}
 
 	private void toggleRedThreadVision(InputEvent.Key event) {

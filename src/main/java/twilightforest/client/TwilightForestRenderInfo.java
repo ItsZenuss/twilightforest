@@ -12,8 +12,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.CustomSkyboxRenderer;
-import net.neoforged.neoforge.client.CustomWeatherEffectRenderer;
+import twilightforest.port.neoforged.neoforge.client.CustomSkyboxRenderer;
+import twilightforest.port.neoforged.neoforge.client.CustomWeatherEffectRenderer;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4fc;
 import twilightforest.TwilightForestMod;
@@ -64,7 +64,7 @@ public class TwilightForestRenderInfo implements CustomSkyboxRenderer, CustomWea
 
 	@Override
 	public boolean renderSnowAndRain(LevelRenderState levelRenderState, WeatherRenderState weatherRenderState, MultiBufferSource bufferSource, Vec3 camPos) {
-		return TFWeatherRenderer.renderSnowAndRain(Minecraft.getInstance().level, Minecraft.getInstance().levelRenderer.getTicks(), Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false), camPos, bufferSource);
+		return TFWeatherRenderer.renderSnowAndRain(Minecraft.getInstance().level, Minecraft.getInstance().levelRenderer.ticks, Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false), camPos, bufferSource);
 	}
 
 	@Override

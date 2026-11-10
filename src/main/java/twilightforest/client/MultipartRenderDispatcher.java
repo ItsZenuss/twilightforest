@@ -20,11 +20,11 @@ import net.minecraft.world.TickRateManager;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent;
-import net.neoforged.neoforge.client.event.RegisterDebugRenderersEvent;
-import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
+import twilightforest.port.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.bus.api.IEventBus;
+import twilightforest.port.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent;
+import twilightforest.port.neoforged.neoforge.client.event.RegisterDebugRenderersEvent;
+import twilightforest.port.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
 import org.jetbrains.annotations.Nullable;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
@@ -42,10 +42,10 @@ public class MultipartRenderDispatcher implements DebugRenderer.SimpleDebugRende
 
 	@PostConstruct
 	private void setup(IEventBus modBus, IEventBus gameBus) {
-		modBus.addListener(this::registerDebugRenderers);
+		modBus.addListener(RegisterDebugRenderersEvent.class, this::registerDebugRenderers);
 
-		gameBus.addListener(this::extractPartRenderStates);
-		gameBus.addListener(this::submitPartRenderStates);
+		gameBus.addListener(ExtractLevelRenderStateEvent.class, this::extractPartRenderStates);
+		gameBus.addListener(SubmitCustomGeometryEvent.class, this::submitPartRenderStates);
 	}
 
 	private void registerDebugRenderers(RegisterDebugRenderersEvent event) {

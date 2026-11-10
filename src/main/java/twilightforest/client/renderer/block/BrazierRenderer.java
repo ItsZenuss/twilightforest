@@ -80,7 +80,6 @@ public class BrazierRenderer implements BlockEntityRenderer<BrazierBlockEntity, 
 		this.blockResolver.update(state.fire, Blocks.FIRE.defaultBlockState(), BlockDisplayContext.create());
 	}
 
-	@Override
 	public AABB getRenderBoundingBox(BrazierBlockEntity blockEntity) {
 		BlockPos pos = blockEntity.getBlockPos();
 		return new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0, pos.getY() + 2.0, pos.getZ() + 1.0);

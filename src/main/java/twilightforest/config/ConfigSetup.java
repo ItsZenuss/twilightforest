@@ -1,9 +1,9 @@
 package twilightforest.config;
 
-import net.neoforged.fml.ModLoadingContext;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import twilightforest.port.neoforged.fml.ModLoadingContext;
+import twilightforest.port.neoforged.fml.config.ModConfig;
+import twilightforest.port.neoforged.fml.event.config.ModConfigEvent;
+import twilightforest.port.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 public final class ConfigSetup {

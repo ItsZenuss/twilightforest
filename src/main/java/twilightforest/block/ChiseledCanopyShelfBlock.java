@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
 import org.jspecify.annotations.Nullable;
 import twilightforest.block.entity.bookshelf.ChiseledCanopyShelfBlockEntity;
 import twilightforest.init.TFBlockEntities;
@@ -54,7 +54,6 @@ public class ChiseledCanopyShelfBlock extends ChiseledBookShelfBlock {
 		super.createBlockStateDefinition(builder.add(SPAWNER));
 	}
 
-	@Override
 	public boolean onCaughtFire(BlockState state, Level level, BlockPos pos, @Nullable Direction face, @Nullable LivingEntity igniter) {
 		if (level.getBlockState(pos).getValue(SPAWNER) && level instanceof ServerLevel serverLevel && level.getBlockEntity(pos) instanceof ChiseledCanopyShelfBlockEntity shelf) {
 			for (int i = 0; i < ChiseledCanopyShelfBlock.SLOT_OCCUPIED_PROPERTIES.size(); i++) {
@@ -65,7 +64,7 @@ public class ChiseledCanopyShelfBlock extends ChiseledBookShelfBlock {
 			}
 			return level.destroyBlock(pos, false);
 		}
-		return super.onCaughtFire(state, level, pos, face, igniter);
+		return false;
 	}
 
 	@Override

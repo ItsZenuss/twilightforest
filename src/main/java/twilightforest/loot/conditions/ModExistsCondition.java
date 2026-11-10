@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.neoforged.fml.ModList;
+import twilightforest.port.neoforged.fml.ModList;
 
 // Loot condition for checking if a mod exists.
 public class ModExistsCondition implements LootItemCondition {

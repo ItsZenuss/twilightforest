@@ -5,13 +5,13 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.EntityMountEvent;
-import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import twilightforest.port.neoforged.bus.api.SubscribeEvent;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.event.entity.EntityMountEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.EntityTeleportEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.player.PlayerEvent;
+import twilightforest.port.neoforged.neoforge.event.tick.EntityTickEvent;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
 import twilightforest.entity.IHostileMount;
@@ -25,11 +25,11 @@ public class HostileMountEvents {
 
 	@PostConstruct
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(this::handleMountDamage);
-		NeoForge.EVENT_BUS.addListener(this::preventTeleportingOffHostileMounts);
-		NeoForge.EVENT_BUS.addListener(this::preventMountDismount);
-		NeoForge.EVENT_BUS.addListener(this::preventHostilMountCrouching);
-		NeoForge.EVENT_BUS.addListener(this::playerLogOut);
+		NeoForge.EVENT_BUS.addListener(LivingIncomingDamageEvent.class, this::handleMountDamage);
+		NeoForge.EVENT_BUS.addListener(EntityTeleportEvent.class, this::preventTeleportingOffHostileMounts);
+		NeoForge.EVENT_BUS.addListener(EntityMountEvent.class, this::preventMountDismount);
+		NeoForge.EVENT_BUS.addListener(EntityTickEvent.Post.class, this::preventHostilMountCrouching);
+		NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedOutEvent.class, this::playerLogOut);
 	}
 
 	@SubscribeEvent

@@ -20,10 +20,10 @@ import net.minecraft.world.level.block.entity.ChiseledBookShelfBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
-import net.neoforged.neoforge.transfer.transaction.TransactionContext;
+import twilightforest.port.neoforged.neoforge.transfer.ResourceHandler;
+import twilightforest.port.neoforged.neoforge.transfer.item.ItemResource;
+import twilightforest.port.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import twilightforest.port.neoforged.neoforge.transfer.transaction.TransactionContext;
 import org.jspecify.annotations.Nullable;
 import twilightforest.block.ChiseledCanopyShelfBlock;
 import twilightforest.init.TFBlockEntities;
@@ -138,6 +138,10 @@ public class ChiseledCanopyShelfBlockEntity extends ChiseledBookShelfBlockEntity
 	@Override
 	public boolean canPlaceItem(int slot, ItemStack stack) {
 		return !this.getBlockState().getValue(ChiseledCanopyShelfBlock.SPAWNER) && super.canPlaceItem(slot, stack);
+	}
+
+	protected void onTransfer(int slot, int delta, TransactionContext transaction) {
+		this.updateState(slot);
 	}
 
 	private class ShelfItemHandler extends ItemStacksResourceHandler {

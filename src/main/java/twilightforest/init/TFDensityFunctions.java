@@ -3,8 +3,8 @@ package twilightforest.init;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.DensityFunction;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import twilightforest.port.neoforged.neoforge.registries.DeferredHolder;
+import twilightforest.port.neoforged.neoforge.registries.DeferredRegister;
 import twilightforest.TwilightForestMod;
 import twilightforest.world.components.chunkgenerators.*;
 

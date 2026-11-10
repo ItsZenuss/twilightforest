@@ -16,7 +16,7 @@ import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import twilightforest.block.GiantBlock;

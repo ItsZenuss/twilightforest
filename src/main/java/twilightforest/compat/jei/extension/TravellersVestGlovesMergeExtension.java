@@ -27,6 +27,6 @@ public class TravellersVestGlovesMergeExtension implements ICraftingCategoryExte
 	public void setRecipe(RecipeHolder<TravellersVestGlovesMergeRecipe> recipeHolder, IRecipeLayoutBuilder builder, ICraftingGridHelper craftingGridHelper, IFocusGroup focuses) {
 		craftingGridHelper.createAndSetInputs(builder, new ArrayList<>(List.of(List.of(TFItems.TRAVELLERS_VEST.toStack()), List.of(TFItems.TRAVELLERS_GLOVES.toStack()))), 0, 0);
 		builder.setShapeless();
-		craftingGridHelper.createAndSetOutputs(builder, List.of(new ItemStack(TFItems.TRAVELLERS_VEST, 1, DataComponentPatch.builder().set(TFDataComponents.TRAVELLERS_HAS_GLOVES.get(), Unit.INSTANCE).build())));
+		craftingGridHelper.createAndSetOutputs(builder, List.of(new ItemStack(TFItems.TRAVELLERS_VEST, 1, DataComponentPatch.builder().set(TFDataComponents.TRAVELLERS_HAS_GLOVES, Unit.INSTANCE).build())));
 	}
 }

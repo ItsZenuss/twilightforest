@@ -12,7 +12,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.util.FakePlayer;
+import twilightforest.port.neoforged.neoforge.common.util.FakePlayer;
 import twilightforest.TFRegistries;
 import twilightforest.init.custom.TravellersModifiersManager;
 import twilightforest.item.travellers_gear.modifiers.InsertableTravellersModifier;

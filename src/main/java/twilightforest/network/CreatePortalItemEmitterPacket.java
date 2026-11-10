@@ -8,7 +8,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import twilightforest.port.neoforged.neoforge.network.handling.IPayloadContext;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.particle.emitter.PortalItemEmitter;
 
@@ -32,7 +32,7 @@ public record CreatePortalItemEmitterPacket(int entityID, int lifetime) implemen
 	}
 
 	public static void handle(CreatePortalItemEmitterPacket message, IPayloadContext ctx) {
-		if (ctx.flow().isClientbound()) {
+		if (ctx.flow() == net.minecraft.network.protocol.PacketFlow.CLIENTBOUND) {
 			@SuppressWarnings("Convert2Lambda")
 			Runnable work = new Runnable() {
 				@Override

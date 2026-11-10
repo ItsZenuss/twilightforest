@@ -16,7 +16,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
+import twilightforest.port.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.boss.Lich;
 import twilightforest.init.TFDataAttachments;

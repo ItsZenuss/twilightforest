@@ -11,7 +11,7 @@ import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.neoforged.neoforge.common.CommonHooks;
+import twilightforest.port.neoforged.neoforge.common.CommonHooks;
 import twilightforest.inventory.UncraftingContainer;
 import twilightforest.inventory.InventoryUtil;
 import twilightforest.inventory.UncraftingMenu;

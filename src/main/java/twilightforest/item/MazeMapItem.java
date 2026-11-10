@@ -27,7 +27,7 @@ import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
 import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.neoforged.neoforge.common.Tags;
+import twilightforest.port.neoforged.neoforge.common.Tags;
 import org.jspecify.annotations.Nullable;
 import twilightforest.init.TFDataMaps;
 import twilightforest.init.TFItems;
@@ -73,8 +73,7 @@ public class MazeMapItem extends MapItem {
 	}
 
 	@Nullable
-	@Override
-	protected TFMazeMapData getCustomMapData(ItemStack stack, Level level) {
+		public TFMazeMapData getCustomMapData(ItemStack stack, Level level) {
 		TFMazeMapData mapdata = getData(stack, level);
 		if (mapdata == null && level instanceof ServerLevel serverLevel) {
 			BlockPos pos = serverLevel.getRespawnData().pos();

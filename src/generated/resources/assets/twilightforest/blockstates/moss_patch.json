@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "type": "twilightforest:plant_patch",
+      "fabric:type": "twilightforest:plant_patch",
       "texture": "twilightforest:block/mosspatch"
     }
   }

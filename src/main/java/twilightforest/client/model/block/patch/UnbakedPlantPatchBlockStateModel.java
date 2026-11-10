@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.model.sprite.Material;
-import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 
 public record UnbakedPlantPatchBlockStateModel(Material texture, boolean shaggify) implements CustomUnbakedBlockStateModel {
 
@@ -21,7 +21,7 @@ public record UnbakedPlantPatchBlockStateModel(Material texture, boolean shaggif
     public BlockStateModel bake(ModelBaker modelBaker) {
         Material.Baked bakedMaterial = modelBaker.materials().get(this.texture, this.texture.sprite()::toDebugFileName);
 
-        BakedQuad.MaterialInfo materialInfo = BakedQuad.MaterialInfo.of(bakedMaterial, bakedMaterial.forceTranslucent() ? Transparency.TRANSLUCENT : bakedMaterial.sprite().transparency(), 0, true, 0, false);
+        BakedQuad.MaterialInfo materialInfo = BakedQuad.MaterialInfo.of(bakedMaterial, bakedMaterial.forceTranslucent() ? Transparency.TRANSLUCENT : bakedMaterial.sprite().transparency(), 0, true, 0);
 
         return new PatchModel(materialInfo, this.shaggify, bakedMaterial);
     }

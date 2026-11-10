@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.Tags;
+import twilightforest.port.neoforged.neoforge.common.Tags;
 import twilightforest.init.TFBlockEntities;
 import twilightforest.init.TFBlocks;
 

@@ -28,9 +28,9 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.common.world.AuxiliaryLightManager;
-import net.neoforged.neoforge.transfer.item.ItemResource;
-import net.neoforged.neoforge.transfer.transaction.Transaction;
+import twilightforest.port.neoforged.neoforge.common.world.AuxiliaryLightManager;
+import twilightforest.port.neoforged.neoforge.transfer.item.ItemResource;
+import twilightforest.port.neoforged.neoforge.transfer.transaction.Transaction;
 import twilightforest.block.entity.MasonJarBlockEntity;
 import twilightforest.init.TFSounds;
 
@@ -83,7 +83,7 @@ public class MasonJarBlock extends JarBlock implements SimpleWaterloggedBlock {
 			return;
 		}
 
-		int maxAmount = Math.min(Item.ABSOLUTE_MAX_STACK_SIZE, resource.getItem().getMaxStackSize(resource.toStack()));
+		int maxAmount = Math.min(Item.ABSOLUTE_MAX_STACK_SIZE, resource.toStack().getMaxStackSize());
 
 		try (Transaction transaction = Transaction.openRoot()) {
 			int countExtracted = handler.extract(SLOT, resource, maxAmount, transaction);
@@ -149,16 +149,12 @@ public class MasonJarBlock extends JarBlock implements SimpleWaterloggedBlock {
 		return true;
 	}
 
-	@Override
 	public boolean hasDynamicLightEmission(BlockState state) {
 		return true;
 	}
 
-	@Override
 	public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-		AuxiliaryLightManager lightManager = level.getAuxLightManager(pos);
-		if (lightManager != null) return lightManager.getLightAt(pos);
-		return super.getLightEmission(state, level, pos);
+		return 0;
 	}
 
 	@Override

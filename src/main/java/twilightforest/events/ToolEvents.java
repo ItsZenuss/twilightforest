@@ -25,15 +25,15 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.damagesource.DamageContainer;
-import net.neoforged.neoforge.event.EventHooks;
-import net.neoforged.neoforge.event.TagsUpdatedEvent;
-import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
-import net.neoforged.neoforge.event.level.block.BreakBlockEvent;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.common.Tags;
+import twilightforest.port.neoforged.neoforge.common.damagesource.DamageContainer;
+import twilightforest.port.neoforged.neoforge.event.EventHooks;
+import twilightforest.port.neoforged.neoforge.event.TagsUpdatedEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.ProjectileImpactEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.living.MobEffectEvent;
+import twilightforest.port.neoforged.neoforge.event.level.block.BreakBlockEvent;
 import org.jetbrains.annotations.Nullable;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
@@ -55,14 +55,14 @@ public class ToolEvents {
 
 	@PostConstruct
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(this::onEnderBowHit);
-		NeoForge.EVENT_BUS.addListener(this::fieryToolSetFire);
-		NeoForge.EVENT_BUS.addListener(this::doKnightmetalToolLogic);
-		NeoForge.EVENT_BUS.addListener(this::addExtraAxeChargingDamage);
-		NeoForge.EVENT_BUS.addListener(this::damageNonMazebreakerToolsMore);
-		NeoForge.EVENT_BUS.addListener(this::preventFatigueWithPocketWatch);
-		NeoForge.EVENT_BUS.addListener(this::handleGiantPickaxeMining);
-		NeoForge.EVENT_BUS.addListener(this::refreshOreMagnetCache);
+		NeoForge.EVENT_BUS.addListener(ProjectileImpactEvent.class, this::onEnderBowHit);
+		NeoForge.EVENT_BUS.addListener(LivingIncomingDamageEvent.class, this::fieryToolSetFire);
+		NeoForge.EVENT_BUS.addListener(LivingIncomingDamageEvent.class, this::doKnightmetalToolLogic);
+		NeoForge.EVENT_BUS.addListener(LivingIncomingDamageEvent.class, this::addExtraAxeChargingDamage);
+		NeoForge.EVENT_BUS.addListener(BreakBlockEvent.class, this::damageNonMazebreakerToolsMore);
+		NeoForge.EVENT_BUS.addListener(MobEffectEvent.Applicable.class, this::preventFatigueWithPocketWatch);
+		NeoForge.EVENT_BUS.addListener(BreakBlockEvent.class, this::handleGiantPickaxeMining);
+		NeoForge.EVENT_BUS.addListener(TagsUpdatedEvent.class, this::refreshOreMagnetCache);
 	}
 
 	private void onEnderBowHit(ProjectileImpactEvent evt) {

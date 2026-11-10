@@ -15,8 +15,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
+import twilightforest.port.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3fc;
 import tamaized.beanification.Autowired;
@@ -36,7 +36,7 @@ public record MasonJarSpecialRenderer(Optional<Item> defaultLid, ItemModelResolv
 	@Override
 	public void submit(@Nullable DataComponentMap map, PoseStack stack, SubmitNodeCollector collector, int light, int overlay, boolean hasFoil, int outlineColor) {
 		if (map != null) {
-			JarLid jarLid = map.get(TFDataComponents.JAR_LID.get());
+			JarLid jarLid = map.get(TFDataComponents.JAR_LID);
 			Item testLid = jarLid == null ? this.defaultLid().orElse(null) : jarLid.lid();
 			StandaloneModelKey<BlockStateModelPart> lid = testLid == null ? null : JarRenderer.LIDS.get().get(testLid);
 			if (lid != null) {

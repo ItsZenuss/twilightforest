@@ -19,7 +19,7 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
-import net.neoforged.fml.loading.FMLEnvironment;
+import twilightforest.port.neoforged.fml.loading.FMLEnvironment;
 import twilightforest.events.EntityEvents;
 import twilightforest.util.landmarks.LandmarkUtil;
 import twilightforest.world.components.structures.start.TFStructureStart;

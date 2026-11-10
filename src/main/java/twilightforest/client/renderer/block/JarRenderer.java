@@ -21,10 +21,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.DecoratedPotBlockEntity.WobbleStyle;
 import net.minecraft.world.level.block.state.properties.RotationSegment;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
-import net.neoforged.neoforge.common.util.Lazy;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import twilightforest.port.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.neoforge.client.model.standalone.StandaloneModelKey;
+import twilightforest.port.neoforged.neoforge.common.util.Lazy;
+import twilightforest.port.neoforged.neoforge.registries.DeferredBlock;
 import org.jspecify.annotations.Nullable;
 import tamaized.beanification.Autowired;
 import tamaized.beanification.Configurable;
@@ -200,7 +200,8 @@ public class JarRenderer<T extends JarBlockEntity> implements BlockEntityRendere
 		public MasonJarRenderer(BlockEntityRendererProvider.Context context) {
 			super(context);
 			this.resolver = context.itemModelResolver();
-		}
+			tamaized.beanification.BeanContext.inject(this);
+	}
 
 		@Override
 		public void extractRenderState(MasonJarBlockEntity blockEntity, JarRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {

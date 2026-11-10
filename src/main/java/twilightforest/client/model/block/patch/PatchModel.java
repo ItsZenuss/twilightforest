@@ -18,8 +18,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
-import net.neoforged.neoforge.client.model.ExtraFaceData;
+import twilightforest.port.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import org.joml.Vector3f;
 import twilightforest.block.PatchBlock;
 
@@ -52,7 +51,7 @@ public class PatchModel implements DynamicBlockStateModel {
 				quadCollection
 		);
 
-		parts.add(new SimpleModelWrapper(quadCollection.build(), this.materialInfo.ambientOcclusion(), this.particleMaterial()));
+		parts.add(new SimpleModelWrapper(quadCollection.build(), this.materialInfo.shade(), this.particleMaterial()));
 	}
 
 	@Override
@@ -182,7 +181,7 @@ public class PatchModel implements DynamicBlockStateModel {
 			default -> new CuboidFace.UVs(minX, minZ, maxX, maxZ);
 		};
 
-		return FaceBakery.bakeQuad(interner, new Vector3f(minX, minY, minZ), new Vector3f(maxX, maxY, maxZ), uvs, direction.getAxis() == Direction.Axis.X ? Quadrant.R90 : Quadrant.R0, this.materialInfo, direction, BlockModelRotation.IDENTITY, null, ExtraFaceData.DEFAULT);
+		return FaceBakery.bakeQuad(interner, new Vector3f(minX, minY, minZ), new Vector3f(maxX, maxY, maxZ), uvs, direction.getAxis() == Direction.Axis.X ? Quadrant.R90 : Quadrant.R0, this.materialInfo, direction, BlockModelRotation.IDENTITY, null);
 	}
 
 }

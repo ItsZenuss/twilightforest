@@ -1,7 +1,7 @@
 package twilightforest.config;
 
 import net.minecraft.resources.Identifier;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import twilightforest.port.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -24,8 +24,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import twilightforest.port.neoforged.neoforge.client.event.ClientTickEvent;
+import twilightforest.port.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import twilightforest.block.CloudBlock;
 import twilightforest.client.renderer.TFWeatherRenderer;
@@ -95,7 +95,7 @@ public class CloudEvents {
 				}
 
 				if (!RENDER_HELPER.isEmpty()) {
-					RandomSource randomsource = RandomSource.create((long) mc.levelRenderer.getTicks() * 312987231L);
+					RandomSource randomsource = RandomSource.create((long) mc.levelRenderer.ticks * 312987231L);
 					BlockPos particlePos = null;
 					int weatherRadius = mc.options.weatherRadius().get();
 					int weatherDiameter = 2 * weatherRadius + 1;
@@ -157,7 +157,7 @@ public class CloudEvents {
 			Minecraft minecraft = Minecraft.getInstance();
 			if (minecraft.level == null) return;
 			float partialTick = minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(false);
-			int ticks = minecraft.levelRenderer.getTicks();
+			int ticks = minecraft.levelRenderer.ticks;
 
 			Vec3 vec3 = event.getLevelRenderState().cameraRenderState.pos;
 			double camX = vec3.x();

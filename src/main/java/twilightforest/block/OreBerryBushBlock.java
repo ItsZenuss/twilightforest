@@ -48,7 +48,6 @@ public class OreBerryBushBlock extends TFBushBlock {
 	}
 
 	@Nullable
-	@Override
 	public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
 		return PathType.DAMAGING;
 	}

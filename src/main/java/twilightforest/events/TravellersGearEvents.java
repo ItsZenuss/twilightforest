@@ -28,22 +28,22 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.AnvilUpdateEvent;
-import net.neoforged.neoforge.event.GrindstoneEvent;
-import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
-import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
-import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerSpawnPhantomsEvent;
-import net.neoforged.neoforge.event.tick.EntityTickEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import twilightforest.port.neoforged.neoforge.attachment.AttachmentType;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.event.AnvilUpdateEvent;
+import twilightforest.port.neoforged.neoforge.event.GrindstoneEvent;
+import twilightforest.port.neoforged.neoforge.event.ItemAttributeModifierEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.ProjectileImpactEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.living.LivingEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.player.PlayerEvent;
+import twilightforest.port.neoforged.neoforge.event.entity.player.PlayerSpawnPhantomsEvent;
+import twilightforest.port.neoforged.neoforge.event.tick.EntityTickEvent;
+import twilightforest.port.neoforged.neoforge.event.tick.PlayerTickEvent;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.registries.DeferredHolder;
+import twilightforest.port.neoforged.neoforge.server.ServerLifecycleHooks;
 import tamaized.beanification.Component;
 import tamaized.beanification.PostConstruct;
 import twilightforest.components.entity.SlimySolesAttachment;
@@ -70,23 +70,23 @@ public class TravellersGearEvents {
 
 	@PostConstruct
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(this::magnetizeArrows);
-		NeoForge.EVENT_BUS.addListener(this::performPerfectDodge);
-		NeoForge.EVENT_BUS.addListener(this::reduceSlimySolesFallDamage);
-		NeoForge.EVENT_BUS.addListener(this::tickMovementModifiers);
-		NeoForge.EVENT_BUS.addListener(this::performStealth);
-		NeoForge.EVENT_BUS.addListener(this::disableHighStepWhileSneaking);
-		NeoForge.EVENT_BUS.addListener(this::updateOtherModifiers);
-		NeoForge.EVENT_BUS.addListener(this::cancelSlimySolesJump);
-		NeoForge.EVENT_BUS.addListener(this::activateAndDeactivateTravellersModifiers);
-		NeoForge.EVENT_BUS.addListener(this::cancelCombiningTravellersGear);
-		NeoForge.EVENT_BUS.addListener(this::cancelPhantomSpawns);
-		NeoForge.EVENT_BUS.addListener(this::fireCraftingModifierTrigger);
-		NeoForge.EVENT_BUS.addListener(this::extractItemsFromSwapHotbarModifier);
-		NeoForge.EVENT_BUS.addListener(this::removeModifiersFromTravellersGear);
-		NeoForge.EVENT_BUS.addListener(this::stopDamagingTravellersGear);
-		NeoForge.EVENT_BUS.addListener(this::setLastDamageArmorTime);
-		NeoForge.EVENT_BUS.addListener(this::keepAttachmentsOnDeath);
+		NeoForge.EVENT_BUS.addListener(ProjectileImpactEvent.class, this::magnetizeArrows);
+		NeoForge.EVENT_BUS.addListener(ProjectileImpactEvent.class, this::performPerfectDodge);
+		NeoForge.EVENT_BUS.addListener(LivingFallEvent.class, this::reduceSlimySolesFallDamage);
+		NeoForge.EVENT_BUS.addListener(PlayerTickEvent.Pre.class, this::tickMovementModifiers);
+		NeoForge.EVENT_BUS.addListener(PlayerTickEvent.Post.class, this::performStealth);
+		NeoForge.EVENT_BUS.addListener(PlayerTickEvent.Pre.class, this::disableHighStepWhileSneaking);
+		NeoForge.EVENT_BUS.addListener(EntityTickEvent.Post.class, this::updateOtherModifiers);
+		NeoForge.EVENT_BUS.addListener(LivingEvent.LivingJumpEvent.class, this::cancelSlimySolesJump);
+		NeoForge.EVENT_BUS.addListener(ItemAttributeModifierEvent.class, this::activateAndDeactivateTravellersModifiers);
+		NeoForge.EVENT_BUS.addListener(AnvilUpdateEvent.class, this::cancelCombiningTravellersGear);
+		NeoForge.EVENT_BUS.addListener(PlayerSpawnPhantomsEvent.class, this::cancelPhantomSpawns);
+		NeoForge.EVENT_BUS.addListener(PlayerEvent.ItemCraftedEvent.class, this::fireCraftingModifierTrigger);
+		NeoForge.EVENT_BUS.addListener(GrindstoneEvent.OnTakeItem.class, this::extractItemsFromSwapHotbarModifier);
+		NeoForge.EVENT_BUS.addListener(GrindstoneEvent.OnPlaceItem.class, this::removeModifiersFromTravellersGear);
+		NeoForge.EVENT_BUS.addListener(ArmorHurtEvent.class, this::stopDamagingTravellersGear);
+		NeoForge.EVENT_BUS.addListener(ArmorHurtEvent.class, this::setLastDamageArmorTime);
+		NeoForge.EVENT_BUS.addListener(PlayerEvent.Clone.class, this::keepAttachmentsOnDeath);
 	}
 
 	private void magnetizeArrows(ProjectileImpactEvent event) {
@@ -346,7 +346,7 @@ public class TravellersGearEvents {
 
 		returnModifierItems(event,
 			TravellersModifiersManager.ITEM_DISPLAY_MODIFIER,
-			TFDataComponents.ITEM_DISPLAY.get(),
+			TFDataComponents.ITEM_DISPLAY,
 			contents -> contents.items().stream()
 		);
 	}

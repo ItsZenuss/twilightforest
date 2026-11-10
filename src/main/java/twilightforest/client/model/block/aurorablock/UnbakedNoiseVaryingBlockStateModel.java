@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.resources.model.ModelBaker;
-import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
+import twilightforest.port.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 
 import java.util.List;
 

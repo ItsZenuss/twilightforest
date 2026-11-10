@@ -33,7 +33,9 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent;
+import twilightforest.port.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent;
+import twilightforest.port.neoforged.neoforge.client.CustomEnvironmentEffectsRendererManager;
+import twilightforest.port.neoforged.neoforge.client.CustomWeatherEffectRenderer;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.TwilightForestMod;
 import twilightforest.client.TwilightForestRenderInfo;
@@ -453,7 +455,8 @@ public class TFWeatherRenderer {
 
 	// Magic numbers taken from WeatherEffectRenderer#extractRenderState
 	public static void extractUrGhastRain(ExtractLevelRenderStateEvent event) {
-		if (!(event.getRenderState().customWeatherEffectRenderer instanceof TwilightForestRenderInfo))
+		CustomWeatherEffectRenderer weatherRenderer = CustomEnvironmentEffectsRendererManager.getCustomWeatherEffectRenderer(TwilightForestRenderInfo.WEATHER_RENDERER);
+		if (!(weatherRenderer instanceof TwilightForestRenderInfo))
 			return;
 
 		WeatherRenderState renderState = event.getRenderState().weatherRenderState;

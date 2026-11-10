@@ -5,13 +5,13 @@
     "twilightforest:moss_patch",
     "minecraft:bowl",
     {
-      "neoforge:ingredient_type": "neoforge:components",
+      "fabric:type": "fabric:components",
+      "base": "minecraft:potion",
       "components": {
         "minecraft:potion_contents": {
           "potion": "minecraft:water"
         }
-      },
-      "items": "minecraft:potion"
+      }
     }
   ],
   "result": {

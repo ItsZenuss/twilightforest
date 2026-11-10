@@ -27,12 +27,12 @@ import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import twilightforest.port.neoforged.api.distmarker.Dist;
+import twilightforest.port.neoforged.fml.ModList;
+import twilightforest.port.neoforged.neoforge.client.event.*;
+import twilightforest.port.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import twilightforest.port.neoforged.neoforge.common.NeoForge;
+import twilightforest.port.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import tamaized.beanification.PostConstruct;
 import twilightforest.TwilightForestMod;
 import tamaized.beanification.Autowired;
@@ -79,31 +79,31 @@ public class ClientGameEvents {
 	@PostConstruct
 	@SuppressWarnings("DuplicatedCode")
 	private void setup() {
-		NeoForge.EVENT_BUS.addListener(this::addCustomTooltips);
-		NeoForge.EVENT_BUS.addListener(this::clientTick);
-		NeoForge.EVENT_BUS.addListener(this::customizeSplashes);
-		NeoForge.EVENT_BUS.addListener(this::clearEntityRenderUtilMap);
-		NeoForge.EVENT_BUS.addListener(this::endAuroraFrame);
-		NeoForge.EVENT_BUS.addListener(this::killVignette);
-		NeoForge.EVENT_BUS.addListener(this::removeHostileMountHealth);
-		NeoForge.EVENT_BUS.addListener(this::renderAurora);
-		NeoForge.EVENT_BUS.addListener(this::renderCustomBossbars);
-		NeoForge.EVENT_BUS.addListener(this::renderGiantBlockOutlines);
-		NeoForge.EVENT_BUS.addListener(this::shakeCamera);
-		NeoForge.EVENT_BUS.addListener(this::translateBookAuthor);
-		NeoForge.EVENT_BUS.addListener(this::updateBowFOV);
+		NeoForge.EVENT_BUS.addListener(ItemTooltipEvent.class, this::addCustomTooltips);
+		NeoForge.EVENT_BUS.addListener(ClientTickEvent.Post.class, this::clientTick);
+		NeoForge.EVENT_BUS.addListener(ScreenEvent.Init.Post.class, this::customizeSplashes);
+		NeoForge.EVENT_BUS.addListener(ScreenEvent.Closing.class, this::clearEntityRenderUtilMap);
+		NeoForge.EVENT_BUS.addListener(RenderFrameEvent.Post.class, this::endAuroraFrame);
+		NeoForge.EVENT_BUS.addListener(RenderFrameEvent.Pre.class, this::killVignette);
+		NeoForge.EVENT_BUS.addListener(RenderGuiLayerEvent.Pre.class, this::removeHostileMountHealth);
+		NeoForge.EVENT_BUS.addListener(RenderLevelStageEvent.AfterWeather.class, this::renderAurora);
+		NeoForge.EVENT_BUS.addListener(CustomizeGuiOverlayEvent.BossEventProgress.class, this::renderCustomBossbars);
+		NeoForge.EVENT_BUS.addListener(ExtractBlockOutlineRenderStateEvent.class, this::renderGiantBlockOutlines);
+		NeoForge.EVENT_BUS.addListener(ViewportEvent.ComputeCameraAngles.class, this::shakeCamera);
+		NeoForge.EVENT_BUS.addListener(ItemTooltipEvent.class, this::translateBookAuthor);
+		NeoForge.EVENT_BUS.addListener(ComputeFovModifierEvent.class, this::updateBowFOV);
 
-		NeoForge.EVENT_BUS.addListener(CloudEvents::renderPrecipitation);
-		NeoForge.EVENT_BUS.addListener(CloudEvents::tickWeatherEffects);
+		NeoForge.EVENT_BUS.addListener(twilightforest.port.neoforged.neoforge.client.event.RenderLevelStageEvent.AfterWeather.class, CloudEvents::renderPrecipitation);
+		NeoForge.EVENT_BUS.addListener(twilightforest.port.neoforged.neoforge.client.event.ClientTickEvent.Post.class, CloudEvents::tickWeatherEffects);
 
-		NeoForge.EVENT_BUS.addListener(FogHandler::colorFog);
+		NeoForge.EVENT_BUS.addListener(twilightforest.port.neoforged.neoforge.client.event.ViewportEvent.ComputeFogColor.class, FogHandler::colorFog);
 
-		NeoForge.EVENT_BUS.addListener(LockedBiomeToastHandler::tickLockedToastLogic);
+		NeoForge.EVENT_BUS.addListener(twilightforest.port.neoforged.neoforge.client.event.ClientTickEvent.Post.class, LockedBiomeToastHandler::tickLockedToastLogic);
 
-		NeoForge.EVENT_BUS.addListener(TFSkyRenderer::extractLevelRender);
-		NeoForge.EVENT_BUS.addListener(TFWeatherRenderer::extractUrGhastRain);
+		NeoForge.EVENT_BUS.addListener(twilightforest.port.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent.class, TFSkyRenderer::extractLevelRender);
+		NeoForge.EVENT_BUS.addListener(twilightforest.port.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent.class, TFWeatherRenderer::extractUrGhastRain);
 
-		NeoForge.EVENT_BUS.addListener(MapDataManager::clearCache);
+		NeoForge.EVENT_BUS.addListener(twilightforest.port.neoforged.neoforge.client.event.ClientPlayerNetworkEvent.LoggingOut.class, MapDataManager::clearCache);
 	}
 
 	private void customizeSplashes(ScreenEvent.Init.Post event) {
@@ -272,8 +272,8 @@ public class ClientGameEvents {
 	}
 
 	private boolean areCuriosEquipped(LivingEntity entity) {
-		if (ModList.get().isLoaded("curios")) {
-//			return CuriosCompat.isCurioEquippedAndVisible(entity, stack -> stack.getItem() instanceof TrophyItem);
+		if (ModList.get().isLoaded("trinkets")) {
+//			return twilightforest.compat.trinkets.TrinketsCompat.isTrinketEquippedAndVisible(entity, stack -> stack.getItem() instanceof TrophyItem);
 		}
 		return false;
 	}

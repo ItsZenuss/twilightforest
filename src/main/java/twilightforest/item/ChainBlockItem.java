@@ -16,7 +16,7 @@ import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import twilightforest.port.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jspecify.annotations.Nullable;
 import twilightforest.entity.projectile.ChainBlock;
 import twilightforest.init.TFDataComponents;
@@ -95,7 +95,7 @@ public class ChainBlockItem extends Item {
 		if (stack.get(TFDataComponents.THROWN_PROJECTILE) == null || !state.is(TFBlockTags.MINEABLE_WITH_BLOCK_AND_CHAIN)) return false;
 		MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
 		if (server != null) {
-			int destruction = stack.getEnchantmentLevel(server.registryAccess().holderOrThrow(TFEnchantments.DESTRUCTION));
+			int destruction = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(server.registryAccess().getOrThrow(TFEnchantments.DESTRUCTION), stack);
 			if (destruction > 0) return this.canHarvest(server.registryAccess(), state, destruction);
 		}
 		return false;

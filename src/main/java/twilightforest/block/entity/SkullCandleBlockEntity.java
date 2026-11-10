@@ -81,7 +81,7 @@ public class SkullCandleBlockEntity extends SkullBlockEntity {
 
 	public void setCandleInfo(SkullCandles newInfo) {
 		DataComponentPatch patch = DataComponentPatch.builder()
-			.set(TFDataComponents.SKULL_CANDLES.get(), newInfo)
+			.set(TFDataComponents.SKULL_CANDLES, newInfo)
 			.build();
 		applyComponents(collectComponents(), patch);
 	}

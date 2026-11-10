@@ -49,7 +49,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.network.PacketDistributor;
+import twilightforest.port.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 import twilightforest.TwilightForestMod;
 import twilightforest.entity.ai.control.NoClipMoveControl;
@@ -381,13 +381,13 @@ public class KnightPhantom extends BaseTFBoss {
 				BlockPos ground = getBlockPosBelowThatAffectsMyMovement();
 				float f = 0.91F;
 				if (this.onGround()) {
-					f = this.level().getBlockState(ground).getFriction(this.level(), ground, this) * 0.91F;
+					f = this.level().getBlockState(ground).getBlock().getFriction() * 0.91F;
 				}
 
 				float f1 = 0.16277137F / (f * f * f);
 				f = 0.91F;
 				if (this.onGround()) {
-					f = this.level().getBlockState(ground).getFriction(this.level(), ground, this) * 0.91F;
+					f = this.level().getBlockState(ground).getBlock().getFriction() * 0.91F;
 				}
 
 				this.moveRelative(this.onGround() ? 0.1F * f1 : 0.02F, vec3);

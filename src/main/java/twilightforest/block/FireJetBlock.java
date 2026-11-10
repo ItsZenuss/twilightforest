@@ -44,7 +44,6 @@ public class FireJetBlock extends BaseEntityBlock {
 	}
 
 	@Nullable
-	@Override
 	public PathType getBlockPathType(BlockState state, BlockGetter getter, BlockPos pos, @Nullable Mob mob) {
 		return state.getValue(STATE) == FireJetVariant.IDLE ? null : PathType.FIRE;
 	}

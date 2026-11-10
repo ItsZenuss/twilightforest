@@ -87,7 +87,6 @@ public class SkullChestBlock extends BaseEntityBlock implements BlockLoggingEnum
 		return createTickerHelper(type, TFBlockEntities.SKULL_CHEST.get(), SkullChestBlockEntity::tick);
 	}
 
-	@Override
 	public float getExplosionResistance(BlockState state, BlockGetter getter, BlockPos pos, Explosion explosion) {
 		return Float.MAX_VALUE;
 	}
@@ -194,7 +193,6 @@ public class SkullChestBlock extends BaseEntityBlock implements BlockLoggingEnum
 		return state.getValue(BlockLoggingEnum.MULTILOGGED).getFluid().defaultFluidState();
 	}
 
-	@Override
 	public boolean canEntityDestroy(BlockState state, BlockGetter getter, BlockPos pos, Entity entity) {
 		return false;
 	}

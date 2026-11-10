@@ -84,7 +84,7 @@ public class BlockHooks {
 	 * Targets: {@link BlockState#canSustainPlant(BlockGetter, BlockPos, Direction, BlockState)}
 	 */
 	public static TriState modifySoilDecisionForMushroomBlockSurvivability(TriState o, LevelReader level, BlockPos pos) {
-		if (!o.isDefault() || !level.getBlockState(pos.below()).isSolidRender())
+		if (o != TriState.DEFAULT || !level.getBlockState(pos.below()).isSolidRender())
 			return o; // Short-circuit - We should not override non-default soil behaviour otherwise this would allow Mushrooms to survive on ALL blocks
 		for (int x = -1; x <= 1; x++) {
 			for (int z = -1; z <= 1; z++) {
@@ -114,7 +114,7 @@ public class BlockHooks {
 	 * {@link twilightforest.asm.transformers.block.UnrestrainedFrictionTransformer}<p/>
 	 *
 	 * Injection Point:<br/>
-	 * {@link net.neoforged.neoforge.common.extensions.IBlockExtension#getFriction(BlockState, LevelReader, BlockPos, Entity)}
+	 * {@link twilightforest.port.neoforged.neoforge.common.extensions.IBlockExtension#getFriction(BlockState, LevelReader, BlockPos, Entity)}
 	 * Targets: FRETURN
 	 */
 	public static float resetBlockFrictionWithUnrestrained(float o, Entity entity) {

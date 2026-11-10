@@ -51,6 +51,7 @@ public class VerticalHollowLogBlock extends Block implements SimpleWaterloggedBl
 		this.climbable = climbable;
 
 		this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false));
+		tamaized.beanification.BeanContext.inject(this);
 	}
 
 	private static boolean isInside(HitResult result, BlockPos pos) {

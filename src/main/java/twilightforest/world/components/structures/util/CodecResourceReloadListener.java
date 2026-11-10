@@ -10,7 +10,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
+import twilightforest.port.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import twilightforest.TwilightForestMod;
 
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public abstract class CodecResourceReloadListener<T> extends SimpleJsonResourceR
 
 	protected void deserialize(ResourceManager manager, Identifier location, JsonElement jsonElement) {
 		try {
-            Optional<T> checkFile = this.codec.parse(this.makeConditionalOps(), jsonElement).result();
+            Optional<T> checkFile = this.codec.parse(((twilightforest.fabric.RegistryAwareJsonOps) this).twilightforest$getOps(), jsonElement).result();
 			if (checkFile.isPresent()) {
 				this.forLocation(manager, location, checkFile.get());
 			} else {

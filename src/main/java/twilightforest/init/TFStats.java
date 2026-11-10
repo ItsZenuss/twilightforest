@@ -5,8 +5,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import twilightforest.port.neoforged.neoforge.registries.DeferredHolder;
+import twilightforest.port.neoforged.neoforge.registries.DeferredRegister;
 import twilightforest.TwilightForestMod;
 
 import java.util.ArrayList;

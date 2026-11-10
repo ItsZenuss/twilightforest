@@ -6,8 +6,8 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.gamerules.*;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import twilightforest.port.neoforged.neoforge.registries.DeferredHolder;
+import twilightforest.port.neoforged.neoforge.registries.DeferredRegister;
 import twilightforest.TwilightForestMod;
 
 public class TFGameRules {

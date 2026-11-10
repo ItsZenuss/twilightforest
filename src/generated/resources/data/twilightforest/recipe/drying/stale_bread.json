@@ -2,13 +2,13 @@
   "type": "twilightforest:drying",
   "filter_time": 6000,
   "input": {
-    "neoforge:ingredient_type": "neoforge:components",
+    "fabric:type": "fabric:components",
+    "base": "minecraft:bread",
     "components": {
       "minecraft:item_name": {
         "translate": "item.minecraft.bread"
       }
-    },
-    "items": "minecraft:bread"
+    }
   },
   "result": {
     "components": {
@@ -47,7 +47,7 @@
           },
           {
             "blocks": "#minecraft:sword_instantly_mines",
-            "speed": 3.4028235E38
+            "speed": 3.4028235e+38
           },
           {
             "blocks": "#minecraft:sword_efficient",

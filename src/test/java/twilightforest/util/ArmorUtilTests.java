@@ -47,7 +47,7 @@ public class ArmorUtilTests {
 					Holder.direct(TFItems.ARCTIC_BOOTS.get()),
 					1,
 					DataComponentPatch.builder()
-						.set(TFDataComponents.EMPERORS_CLOTH.get(), Unit.INSTANCE)
+						.set(TFDataComponents.EMPERORS_CLOTH, Unit.INSTANCE)
 						.build()
 				)
 			);

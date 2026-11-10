@@ -10,6 +10,7 @@ public class PartEntityState extends EntityRenderState {
 	public float yRotO;
 	public float xRot;
 	public float deathTime;
+	public float partialTick;
 	public float walkAnimationPos;
 	public float walkAnimationSpeed;
 	public boolean isUpsideDown;

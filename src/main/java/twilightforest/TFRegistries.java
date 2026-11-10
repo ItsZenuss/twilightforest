@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
-import net.neoforged.neoforge.registries.RegistryBuilder;
+import twilightforest.port.neoforged.neoforge.registries.RegistryBuilder;
 import twilightforest.entity.MagicPaintingVariant;
 import twilightforest.entity.passive.DwarfRabbitVariant;
 import twilightforest.entity.passive.TinyBirdVariant;

@@ -5,8 +5,8 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.common.util.Lazy;
+import twilightforest.port.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import twilightforest.port.neoforged.neoforge.common.util.Lazy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
